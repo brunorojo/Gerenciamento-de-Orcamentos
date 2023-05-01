@@ -1,9 +1,9 @@
-<?php 
+<?php
 session_start();
 require_once "_autorize_admin.php";
-    include_once "../conexao.php";
-
+include_once "../conexao.php";
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -16,13 +16,12 @@ require_once "_autorize_admin.php";
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <title>Cadastrar Projeto</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
+    <title>RETENÇÃO DE ORÇAMENTOS</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="../imagens/brfavicon.ico" rel="icon" />
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -42,21 +41,19 @@ require_once "_autorize_admin.php";
 </head>
 
 <body>
-<?php 
+<?php
 if (isset($_GET["resultado"])) {
-  $resultado = $_GET["resultado"];
+    $resultado = $_GET["resultado"];
 
-  if ($resultado == 200) {
-      echo "<script>
-      
+    if ($resultado == 200) {
+        echo "<script>
       Swal.fire(
-        'Cadastrado com sucesso',
-        'Clique em ok para continuar',
+        'Cadastrado com sucesso!',
+        '',
         'success'
       )
-
       </script>";
-  }
+    }
 }
 ?>
 
@@ -119,12 +116,12 @@ if (isset($_GET["resultado"])) {
                     <label for="exampleFormControlInput1" class="form-label">Cliente</label>
                     <select name="cliente" class="form-select" id="floatingSelect" aria-label="Floating label select example">
                         <option selected>Selecione o cliente</option>
-                        <?php 
-                            $sql = "SELECT * FROM cliente";
-                            $resultado = mysqli_query($conn, $sql);
-                            while ($dados = mysqli_fetch_assoc($resultado)) {
-                        ?>
-                        <option value="<?php echo $dados["nome"]; ?>"><?php echo $dados["nome"]; ?></option>
+                        <?php
+                        $sql = "SELECT * FROM cliente";
+                        $resultado = mysqli_query($conn, $sql);
+                        while ($dados = mysqli_fetch_assoc($resultado)) {
+                            ?>
+                                    <option value="<?php echo $dados["nome"]; ?>"><?php echo $dados["nome"]; ?></option>
                         <?php } ?>
                     </select>
                 </div>

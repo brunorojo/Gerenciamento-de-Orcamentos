@@ -11,33 +11,32 @@ include_once "../conexao.php";
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
     <title>Administração</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="..imagens/brfavicon.ico" rel="icon" />
 
     <!-- Google Fonts -->
-    <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
 
     <!-- Vendor CSS Files -->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet" />
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.36.3/apexcharts.min.css"> -->
 
     <!-- Template Main CSS File -->
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet" />
 
     <!-- =======================================================
   * Template Name: NiceAdmin - v2.4.1
@@ -53,9 +52,7 @@ include_once "../conexao.php";
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
-                
-            </a>
+            <a href="index.html" class="logo d-flex align-items-center"></a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
 
@@ -67,7 +64,7 @@ include_once "../conexao.php";
                 <li class="nav-item dropdown pe-3">
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                       
+
                         <span class="d-none d-md-block dropdown-toggle ps-2">Usuário</span>
                     </a><!-- End Profile Iamge Icon -->
 
@@ -96,7 +93,9 @@ include_once "../conexao.php";
             <h1>Dashboard</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                    <li class="breadcrumb-item">
+                        <a href="index.php">Home</a>
+                    </li>
                     <li class="breadcrumb-item active">Dashboard</li>
                 </ol>
             </nav>
@@ -122,12 +121,14 @@ include_once "../conexao.php";
                                         </div>
                                         <div class="ps-3">
                                             <?php
-                                            $sql = "SELECT count(*) as total_projetos_fechados from projeto 
+                                            $sql = "SELECT count(*) as total_projetos_fechados from projeto
                                                     where status in('aprovado', 'iniciado', 'finalizado')";
                                             $exec_sql = mysqli_query($conn, $sql);
                                             $resultado = mysqli_fetch_object($exec_sql);
                                             ?>
-                                            <h6><?= $resultado->total_projetos_fechados ?></h6>
+                                            <h6>
+                                                <?= $resultado->total_projetos_fechados ?>
+                                            </h6>
 
                                         </div>
                                     </div>
@@ -159,10 +160,13 @@ include_once "../conexao.php";
                                                 // Return the number of rows in result set
                                                 $rowcount = mysqli_num_rows($resultado);
 
-                                            ?>
-                                                <h6><?php echo $rowcount; ?></h6>
+                                                ?>
+                                                <h6>
+                                                    <?php echo $rowcount; ?>
+                                                </h6>
 
-                                            <?php }; ?>
+                                            <?php }
+                                            ; ?>
 
                                         </div>
                                     </div>
@@ -189,12 +193,14 @@ include_once "../conexao.php";
                                         </div>
                                         <div class="ps-3">
                                             <?php
-                                            $sql = "SELECT count(*) as total_devs from login 
+                                            $sql = "SELECT count(*) as total_devs from login
                                                     where nivel = 'dev';";
                                             $exec_sql = mysqli_query($conn, $sql);
                                             $resultado = mysqli_fetch_object($exec_sql);
                                             ?>
-                                            <h6><?= $resultado->total_devs ?></h6>
+                                            <h6>
+                                                <?= $resultado->total_devs ?>
+                                            </h6>
 
                                         </div>
                                     </div>
@@ -211,8 +217,8 @@ include_once "../conexao.php";
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         Faturamento Total
-                                        <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" 
-                                        data-bs-content="Faturamento total até o dia de hoje! Esse valor não contém o valor de parcelas de projetos dos próximos dias e meses, apenas até o dia atual. Se tiver uma parcela atrasada até o dia atual, o valor será somado mesmo assim ao faturamento">
+                                        <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus"
+                                            data-bs-content="Faturamento total até o dia de hoje! Esse valor não contém o valor de parcelas de projetos dos próximos dias e meses, apenas até o dia atual. Se tiver uma parcela atrasada até o dia atual, o valor será somado mesmo assim ao faturamento">
                                             <a class="text-decoration-none" href="#">
                                                 <span class="material-symbols-outlined" style="font-size: 16px;">
                                                     info
@@ -227,8 +233,8 @@ include_once "../conexao.php";
                                         </div>
                                         <?php
 
-                                        $sql = "SELECT SUM(valor_parcela) as dinheiro_empresa 
-                                            FROM lucro_empresa 
+                                        $sql = "SELECT SUM(valor_parcela) as dinheiro_empresa
+                                            FROM lucro_empresa
                                             WHERE data_parcela <= '" . date('Y-m-d') . "';";
                                         $resultado = mysqli_query($conn, $sql);
 
@@ -239,7 +245,9 @@ include_once "../conexao.php";
                                         ?>
 
                                         <div class='ps-3'>
-                                            <h6>R$ <?= number_format($dinheirototal_faturamento, 2, ',', '.') ?></h6>
+                                            <h6>
+                                                R$ <?= number_format($dinheirototal_faturamento, 2, ',', '.') ?>
+                                            </h6>
                                         </div>
 
                                     </div>
@@ -254,8 +262,8 @@ include_once "../conexao.php";
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         Despesas Totais
-                                        <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" 
-                                        data-bs-content="A soma do valor de todas as despesas pagas e pendentes até o dia de hoje!">
+                                        <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus"
+                                            data-bs-content="A soma do valor de todas as despesas pagas e pendentes até o dia de hoje!">
                                             <a class="text-decoration-none" href="#">
                                                 <span class="material-symbols-outlined" style="font-size: 16px;">
                                                     info
@@ -271,9 +279,9 @@ include_once "../conexao.php";
                                         <?php
 
                                         // $sql = "SELECT SUM(valor) as despesas_empresa FROM despesa WHERE data <= '". date('Y-m-t') ."';";
-                                        $sql = "SELECT SUM(valor) as despesas_empresa FROM despesa 
+                                        $sql = "SELECT SUM(valor) as despesas_empresa FROM despesa
                                             WHERE data_pagamento <= '" . date('Y-m-d') . "';";
-                                        // $sql = "SELECT SUM(valor) as despesas_empresa FROM despesa 
+                                        // $sql = "SELECT SUM(valor) as despesas_empresa FROM despesa
                                         //     WHERE status_pagamento = 0 && data_pagamento <= '" . date('Y-m-d') . "';";
                                         $resultado = mysqli_query($conn, $sql);
                                         $dados = mysqli_fetch_object($resultado);
@@ -282,7 +290,9 @@ include_once "../conexao.php";
                                         ?>
 
                                         <div class='ps-3'>
-                                            <h6>R$ <?= number_format($total_despesas_empresa, 2, ',', '.') ?></h6>
+                                            <h6>
+                                                R$ <?= number_format($total_despesas_empresa, 2, ',', '.') ?>
+                                            </h6>
                                         </div>
 
                                     </div>
@@ -297,8 +307,8 @@ include_once "../conexao.php";
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         Lucro Total
-                                        <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" 
-                                        data-bs-content="O valor do lucro total é o faturamento total menos o valor das despesas totais">
+                                        <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus"
+                                            data-bs-content="O valor do lucro total é o faturamento total menos o valor das despesas totais">
                                             <a class="text-decoration-none" href="#">
                                                 <span class="material-symbols-outlined" style="font-size: 16px;">
                                                     info
@@ -313,13 +323,15 @@ include_once "../conexao.php";
                                         </div>
                                         <?php
 
-                                        
+
                                         $lucro_total = $dinheirototal_faturamento - $total_despesas_empresa;
 
                                         ?>
 
                                         <div class='ps-3'>
-                                            <h6>R$ <?= number_format($lucro_total, 2, ',', '.') ?></h6>
+                                            <h6>
+                                                R$ <?= number_format($lucro_total, 2, ',', '.') ?>
+                                            </h6>
                                         </div>
 
                                     </div>
@@ -337,8 +349,8 @@ include_once "../conexao.php";
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         Faturamento no Mês
-                                        <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" 
-                                        data-bs-content="Valor total do faturamento de 01 deste mês até o dia de hoje (<?= date('d/m') ?>)! Esse valor inclui parcelas de projetos que já foram pagas ou serão pagas nesse periódo do dia 01 até hoje.">
+                                        <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus"
+                                            data-bs-content="Valor total do faturamento de 01 deste mês até o dia de hoje (<?= date('d/m') ?>)! Esse valor inclui parcelas de projetos que já foram pagas ou serão pagas nesse periódo do dia 01 até hoje.">
                                             <a class="text-decoration-none" href="#">
                                                 <span class="material-symbols-outlined" style="font-size: 16px;">
                                                     info
@@ -353,9 +365,9 @@ include_once "../conexao.php";
                                         </div>
                                         <?php
 
-                                        $sql = "SELECT SUM(valor_parcela) as dinheiro_empresa 
-                                        FROM lucro_empresa 
-                                        WHERE data_parcela >= '". date('Y-m-01') ."' && data_parcela <= '" . date('Y-m-d') . "';";
+                                        $sql = "SELECT SUM(valor_parcela) as dinheiro_empresa
+                                        FROM lucro_empresa
+                                        WHERE data_parcela >= '" . date('Y-m-01') . "' && data_parcela <= '" . date('Y-m-d') . "';";
                                         $resultado = mysqli_query($conn, $sql);
 
                                         $dados = mysqli_fetch_object($resultado);
@@ -365,7 +377,9 @@ include_once "../conexao.php";
                                         ?>
 
                                         <div class='ps-3'>
-                                            <h6>R$ <?= number_format($dinheirototal_faturamento_mes, 2, ',', '.') ?></h6>
+                                            <h6>
+                                                R$ <?= number_format($dinheirototal_faturamento_mes, 2, ',', '.') ?>
+                                            </h6>
                                         </div>
 
                                     </div>
@@ -380,8 +394,8 @@ include_once "../conexao.php";
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         Despesas no Mês
-                                        <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" 
-                                        data-bs-content="A soma do valor de todas as despesas pagas e pendentes do dia 01 deste mês até hoje (<?= date('d/m') ?>)!">
+                                        <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus"
+                                            data-bs-content="A soma do valor de todas as despesas pagas e pendentes do dia 01 deste mês até hoje (<?= date('d/m') ?>)!">
                                             <a class="text-decoration-none" href="#">
                                                 <span class="material-symbols-outlined" style="font-size: 16px;">
                                                     info
@@ -397,9 +411,9 @@ include_once "../conexao.php";
                                         <?php
 
                                         // $sql = "SELECT SUM(valor) as despesas_empresa FROM despesa WHERE data <= '". date('Y-m-t') ."';";
-                                        $sql = "SELECT SUM(valor) as despesas_empresa FROM despesa 
+                                        $sql = "SELECT SUM(valor) as despesas_empresa FROM despesa
                                             WHERE data_pagamento >= '" . date('Y-m-01') . "' && data_pagamento <= '" . date('Y-m-d') . "';";
-                                        // $sql = "SELECT SUM(valor) as despesas_empresa FROM despesa 
+                                        // $sql = "SELECT SUM(valor) as despesas_empresa FROM despesa
                                         //     WHERE status_pagamento = 0 && data_pagamento <= '" . date('Y-m-d') . "';";
                                         $resultado = mysqli_query($conn, $sql);
                                         $dados = mysqli_fetch_object($resultado);
@@ -408,7 +422,9 @@ include_once "../conexao.php";
                                         ?>
 
                                         <div class='ps-3'>
-                                            <h6>R$ <?= number_format($total_despesas_empresa_mes, 2, ',', '.') ?></h6>
+                                            <h6>
+                                                R$ <?= number_format($total_despesas_empresa_mes, 2, ',', '.') ?>
+                                            </h6>
                                         </div>
 
                                     </div>
@@ -423,8 +439,8 @@ include_once "../conexao.php";
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         Lucro no Mês
-                                        <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" 
-                                        data-bs-content="O valor do lucro no mês é o faturamento do mês menos o valor das despesas no mês, do dia 01 até hoje (<?= date('d/m') ?>)!">
+                                        <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus"
+                                            data-bs-content="O valor do lucro no mês é o faturamento do mês menos o valor das despesas no mês, do dia 01 até hoje (<?= date('d/m') ?>)!">
                                             <a class="text-decoration-none" href="#">
                                                 <span class="material-symbols-outlined" style="font-size: 16px;">
                                                     info
@@ -439,12 +455,14 @@ include_once "../conexao.php";
                                         </div>
                                         <?php
 
-                                            $lucro_total_mes = $dinheirototal_faturamento_mes - $total_despesas_empresa_mes;
+                                        $lucro_total_mes = $dinheirototal_faturamento_mes - $total_despesas_empresa_mes;
 
                                         ?>
 
                                         <div class='ps-3'>
-                                            <h6>R$ <?= number_format($lucro_total_mes, 2, ',', '.') ?></h6>
+                                            <h6>
+                                                R$ <?= number_format($lucro_total_mes, 2, ',', '.') ?>
+                                            </h6>
                                         </div>
 
                                     </div>
@@ -569,16 +587,6 @@ include_once "../conexao.php";
                 </div>
                 <!-- ========== Fim Faturamento nos útimos 12 meses ========== -->
 
-            </div><!-- End Website Traffic -->
-
-
-
-
-            </div>
-            </div><!-- End News & Updates -->
-
-            </div><!-- End Right side columns -->
-
             </div>
         </section>
 
@@ -587,7 +595,7 @@ include_once "../conexao.php";
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span></span></strong>. Todos os direitos reservados
+            &copy; Copyright. Todos os direitos reservados.
         </div>
         <div class="credits">
             <!-- All the links in the footer should remain intact. -->
@@ -597,7 +605,9 @@ include_once "../conexao.php";
         </div>
     </footer><!-- End Footer -->
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+        <i class="bi bi-arrow-up-short"></i>
+    </a>
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>

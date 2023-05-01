@@ -1,10 +1,9 @@
 <?php
 session_start();
 require_once "_autorize_admin.php";
-
 include_once "../conexao.php";
-
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -18,13 +17,12 @@ include_once "../conexao.php";
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Administração</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
+    <title>RETENÇÃO DE ORÇAMENTOS</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="../imagens/brfavicon.ico" rel="icon" />
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -103,7 +101,6 @@ include_once "../conexao.php";
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                     <li class="breadcrumb-item active">Projetos</li>
-
                 </ol>
             </nav>
         </div>
@@ -135,7 +132,6 @@ include_once "../conexao.php";
                         </thead>
                         <tbody>
                             <?php
-
                             // $sql = "SELECT *,projeto.id as id, orcamentos.id as orc_id FROM projeto LEFT JOIN orcamentos ON projeto.id = orcamentos.projeto_id
                             //         ORDER BY projeto.id DESC";
                             $sql = "SELECT * FROM projeto ORDER BY id DESC";
@@ -143,73 +139,74 @@ include_once "../conexao.php";
 
                             while ($dados = mysqli_fetch_assoc($resultado)) {
                                 # code...
+                            
+                                ?>
+                                        <script>
+                                            function idHidden(id) {
+                                                $("#hidden").val(id);
+                                            }
+                                        </script>
+                                        <tr>
+                                            <td><?php echo $dados["nome"] ?></td>
+                                            <td><a href="<?php echo $dados["briefing"]; ?>"><span class="material-symbols-outlined text-primary">description</a></span>
+                                            </td>
+                                            <td><?php echo $dados["desenvolvedor"]; ?></td>
+                                            <td><?= number_format($dados["valordev"], 2, ',', '.') ?></td>
+                                            <td><?= number_format($dados["valorcliente"], 2, ',', '.') ?></td>
+                                            <td><?= number_format($dados["lucroempresa"], 2, ',', '.') ?></td>
+                                            <td><?php echo $dados["cliente"]; ?></td>
+                                            <!-- Data de entrega -->
+                                            <td>
+                                                <?php if ($dados["dataentrega"] && $dados["status"] == 'aprovado' || $dados["status"] == 'iniciado' || $dados["status"] == 'finalizado'): ?>
 
-                            ?>
-                                <script>
-                                    function idHidden(id) {
-                                        $("#hidden").val(id);
-                                    }
-                                </script>
-                                <tr>
-                                    <td><?php echo $dados["nome"] ?></td>
-                                    <td><a href="<?php echo $dados["briefing"]; ?>"><span class="material-symbols-outlined text-primary">description</a></span>
-                                    </td>
-                                    <td><?php echo $dados["desenvolvedor"]; ?></td>
-                                    <td><?= number_format($dados["valordev"], 2, ',', '.') ?></td>
-                                    <td><?= number_format($dados["valorcliente"], 2, ',', '.') ?></td>
-                                    <td><?= number_format($dados["lucroempresa"], 2, ',', '.') ?></td>
-                                    <td><?php echo $dados["cliente"]; ?></td>
-                                    <!-- Data de entrega -->
-                                    <td>
-                                        <?php if($dados["dataentrega"] && $dados["status"] == 'aprovado' || $dados["status"] == 'iniciado' || $dados["status"] == 'finalizado' ): ?>
-
-                                            <?= date('d/m/Y', strtotime($dados["data_inicio"] . " + " . ceil($dados["dataentrega"] ). " days")) ?>
+                                                            <?= date('d/m/Y', strtotime($dados["data_inicio"] . " + " . ceil($dados["dataentrega"]) . " days")) ?>
                                             
-                                        <?php else: ?>
-                                            <?= $dados["dataentrega"] ? $dados["dataentrega"] . ' dias' : $dados["dataentrega"] ?>
-                                        <?php endif; ?>
-                                    </td>
-                                    <td>
+                                                <?php else: ?>
+                                                            <?= $dados["dataentrega"] ? $dados["dataentrega"] . ' dias' : $dados["dataentrega"] ?>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td>
 
-                                        <?php
+                                                <?php
 
-                                        $sql_1_xyz = "SELECT * FROM orcamentos WHERE projeto_id = ".$dados['id']." ORDER BY id DESC";
-                                        $resultadl_1_xyz = mysqli_query($conn, $sql_1_xyz);
-                                        $orcamentos= mysqli_fetch_all($resultadl_1_xyz, MYSQLI_ASSOC);
-                                        // echo '<pre>';
-                                        // print_r($orcamentos);
-                                        // echo '</pre>';
-                                        
-                                        ?>
+                                                $sql_1_xyz = "SELECT * FROM orcamentos WHERE projeto_id = " . $dados['id'] . " ORDER BY id DESC";
+                                                $resultadl_1_xyz = mysqli_query($conn, $sql_1_xyz);
+                                                $orcamentos = mysqli_fetch_all($resultadl_1_xyz, MYSQLI_ASSOC);
+                                                // echo '<pre>';
+                                                // print_r($orcamentos);
+                                                // echo '</pre>';
+                                            
+                                                ?>
 
-                                        <?php if (!empty($orcamentos) && $dados['status'] == 'Aguardando') : ?>
-                                            <span class="badge bg-success">orçado</span>
-                                        <?php else : ?>
-                                            <span class="badge bg-success"><?php echo $dados["status"]; ?></span>
-                                        <?php endif; ?>
-                                    </td>
+                                                <?php if (!empty($orcamentos) && $dados['status'] == 'Aguardando'): ?>
+                                                            <span class="badge bg-success">orçado</span>
+                                                <?php else: ?>
+                                                            <span class="badge bg-success"><?php echo $dados["status"]; ?></span>
+                                                <?php endif; ?>
+                                            </td>
 
-                                    <td>
+                                            <td>
                                        
-                                        <?php if (!empty($orcamentos) && $dados['status'] == 'Aguardando') : ?>
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#modal-orcamentos" 
-                                                onclick='setOrcamentos(`<?= json_encode($orcamentos) ?>`)'>
-                                                <span class="material-symbols-outlined text-success">done_all</span>
-                                            </a>
-                                        <?php else : ?>
-                                            <span class="material-symbols-outlined text-secondary opacity-50">done_all</span>
-                                        <?php endif; ?>
+                                                <?php if (!empty($orcamentos) && $dados['status'] == 'Aguardando'): ?>
+                                                            <a href="#" data-bs-toggle="modal" data-bs-target="#modal-orcamentos" 
+                                                                onclick='setOrcamentos(`<?= json_encode($orcamentos) ?>`)'>
+                                                                <span class="material-symbols-outlined text-success">done_all</span>
+                                                            </a>
+                                                <?php else: ?>
+                                                            <span class="material-symbols-outlined text-secondary opacity-50">done_all</span>
+                                                <?php endif; ?>
 
-                                    </td>
+                                            </td>
 
-                                    <td>
-                                        <a href="../scripts.php?deletarprojeto=<?php echo $dados["id"]; ?>" 
-                                        onclick="if(!confirm('Deseja realmente remover este projeto?')) event.preventDefault()">
-                                            <span class="material-symbols-outlined text-danger">delete</span>
-                                        </a>
-                                    </td>
-                                </tr>
-                            <?php }; ?>
+                                            <td>
+                                                <a href="../scripts.php?deletarprojeto=<?php echo $dados["id"]; ?>" 
+                                                onclick="if(!confirm('Deseja realmente remover este projeto?')) event.preventDefault()">
+                                                    <span class="material-symbols-outlined text-danger">delete</span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                            <?php }
+                            ; ?>
                         </tbody>
                     </table>
 
@@ -224,13 +221,11 @@ include_once "../conexao.php";
 
             if ($resultado == 200) {
                 echo "<script>
-      
       Swal.fire(
-        'Apagado com sucesso',
-        'Cuidado para não apagar projetos que estão em execução',
+        'Apagado com sucesso!',
+        '',
         'success'
       )
-
       </script>";
             }
         }
@@ -242,7 +237,7 @@ include_once "../conexao.php";
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span></span></strong>. Todos os direitos reservados
+            &copy; Copyright. Todos os direitos reservados.
         </div>
         <div class="credits">
             <!-- All the links in the footer should remain intact. -->

@@ -1,16 +1,13 @@
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
-
     <ul class="sidebar-nav" id="sidebar-nav">
-
         <li class="nav-item">
             <a class="nav-link collapsed gap-2" href="index.php">
                 <span class="material-symbols-outlined">
                     monitor_heart
                 </span> <span>Dashboard</span>
             </a>
-        </li><!-- End Dashboard Nav -->
-
+        </li>
         <li class="nav-item">
             <a class="nav-link collapsed gap-2" href="projetos.php">
                 <span class="material-symbols-outlined">rocket_launch</span>
@@ -49,10 +46,6 @@
                 </span>
                 <span>Despesas</span>
             </a>
-        </li><!-- End Profile Page Nav -->
-
-
-
+        </li>
     </ul>
-
-</aside><!-- End Sidebar-->
+</aside>

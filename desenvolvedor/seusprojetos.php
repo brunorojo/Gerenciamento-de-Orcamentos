@@ -1,40 +1,30 @@
-<?php 
+<?php
 session_start();
 require_once "_autorize_dev.php";
 include_once "../conexao.php";
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-    <title>Jobs</title>
+    
+    <title>RETENÇÃO DE ORÇAMENTOS</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="../imagens/brfavicon.ico" rel="icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -48,7 +38,7 @@ include_once "../conexao.php";
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
 
-    <!-- =======================================================
+  <!-- =======================================================
   * Template Name: NiceAdmin - v2.4.1
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
   * Author: BootstrapMade.com
@@ -58,22 +48,20 @@ include_once "../conexao.php";
 
 <body>
 
-    <?php 
+    <?php
     if (isset($_GET["jaorçado"])) {
-
         if ($_GET["jaorçado"] == 200) {
-           echo "<script>alert('projeto já orçado por outro desenvolvedor, não roube a vez do coleguinha.')</script>";
+            echo "<script>alert('projeto já orçado por outro desenvolvedor, não roube a vez do coleguinha.')</script>";
         }
-        
     }
+
     if (isset($_GET["orcamentoenviado"])) {
 
         if ($_GET["orcamentoenviado"] == 200) {
-           echo "<script>alert('Orçamento enviado com sucesso')</script>";
+            echo "<script>alert('Orçamento enviado com sucesso')</script>";
         }
-        
     }
-?>
+    ?>
 
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
@@ -85,22 +73,13 @@ include_once "../conexao.php";
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
 
-
-
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
-
-
                 <li class="nav-item dropdown pe-3">
-
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                       
-                        <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $_SESSION["email"]; ?></span>
+                        <span class="d-none d-md-block dropdown-toggle ps-2">Usuário</span>
                     </a><!-- End Profile Iamge Icon -->
-
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-
-
                         <li>
                             <a class="dropdown-item d-flex align-items-center" href="../logout.php">
                                 <i class="bi bi-box-arrow-right"></i>
@@ -117,8 +96,8 @@ include_once "../conexao.php";
     </header><!-- End Header -->
 
     <!-- ======= Sidebar ======= -->
-    <?php 
-        include_once "sadbar.php";
+    <?php
+    include_once "sadbar.php";
     ?>
     <!-- End Sidebar-->
 
@@ -155,39 +134,40 @@ include_once "../conexao.php";
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
-                                    // $sql = "SELECT * FROM projeto 
-                                    //     WHERE status != 'aguardando' AND desenvolvedor = '$_SESSION[email]' 
-                                    //     ORDER BY id DESC";
-                                    $sql = "SELECT *, projeto.id as id FROM orcamentos LEFT JOIN projeto ON orcamentos.projeto_id = projeto.id 
-                                        WHERE orcamentos.dev_id = ".$_SESSION['id']." ORDER BY orcamentos.id DESC ";
-                                    $resultado = mysqli_query($conn, $sql);
+                                <?php
+                                // $sql = "SELECT * FROM projeto 
+                                //     WHERE status != 'aguardando' AND desenvolvedor = '$_SESSION[email]' 
+                                //     ORDER BY id DESC";
+                                $sql = "SELECT *, projeto.id as id FROM orcamentos LEFT JOIN projeto ON orcamentos.projeto_id = projeto.id 
+                                        WHERE orcamentos.dev_id = " . $_SESSION['id'] . " ORDER BY orcamentos.id DESC ";
+                                $resultado = mysqli_query($conn, $sql);
 
-                                    while ($dados = mysqli_fetch_assoc($resultado)) {
-                                        # code...
-                                    
-                                ?>
-                                <script>
-                                function idHidden(id) {
-                                    $("#hidden").val(id);
-                                }
-                                </script>
-                                <tr>
-                                    <td><?php echo $dados["nome"]; ?></td>
-                                    <td><a href="<?php echo $dados["briefing"]; ?>"><span
-                                                class="material-symbols-outlined text-primary">description</a></span>
-                                    </td>
+                                while ($dados = mysqli_fetch_assoc($resultado)) {
+                                    # code...
+                                
+                                    ?>
+                                    <script>
+                                    function idHidden(id) {
+                                        $("#hidden").val(id);
+                                    }
+                                    </script>
+                                    <tr>
+                                        <td><?php echo $dados["nome"]; ?></td>
+                                        <td><a href="<?php echo $dados["briefing"]; ?>"><span
+                                                    class="material-symbols-outlined text-primary">description</a></span>
+                                        </td>
                                    
-                                    <td><a href="../scripts.php?iniciarprojeto=<?php echo $dados["id"]; ?>" onclick="if(!confirm('Você quer iniciar este projeto agora?')) event.preventDefault()"><span
-                                                class="material-symbols-outlined text-success">slow_motion_video</span></a>
-                                    </td>
-                                    <td><a href="../scripts.php?finalizarprojeto=<?php echo $dados["id"]; ?>" onclick="if(!confirm('Certeza que o projeto está finalizado?')) event.preventDefault()"><span
-                                                class="material-symbols-outlined text-primary">playlist_add_check_circle</span></a>
-                                    </td>
-                                    <td><span class="badge bg-success"><?php echo $dados["status"] == 'orçado' ? 'Aguardando' : $dados["status"]; ?></span></td>
+                                        <td><a href="../scripts.php?iniciarprojeto=<?php echo $dados["id"]; ?>" onclick="if(!confirm('Você quer iniciar este projeto agora?')) event.preventDefault()"><span
+                                                    class="material-symbols-outlined text-success">slow_motion_video</span></a>
+                                        </td>
+                                        <td><a href="../scripts.php?finalizarprojeto=<?php echo $dados["id"]; ?>" onclick="if(!confirm('Certeza que o projeto está finalizado?')) event.preventDefault()"><span
+                                                    class="material-symbols-outlined text-primary">playlist_add_check_circle</span></a>
+                                        </td>
+                                        <td><span class="badge bg-success"><?php echo $dados["status"] == 'orçado' ? 'Aguardando' : $dados["status"]; ?></span></td>
 
-                                </tr>
-                                <?php }; ?>
+                                    </tr>
+                                <?php }
+                                ; ?>
                             </tbody>
                         </table>
 
@@ -270,7 +250,7 @@ include_once "../conexao.php";
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span></span></span></strong> Todos os direitos reservados.
+            &copy; Copyright. Todos os direitos reservados.
         </div>
         <div class="credits">
             <!-- All the links in the footer should remain intact. -->
@@ -283,34 +263,34 @@ include_once "../conexao.php";
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
-    <?php 
+    <?php
     if (isset($_POST["enviar"])) {
-        
-?>
 
-    <script>
-    Swal.fire(
-        'Orçamento enviado com sucesso!',
-        'Vamos aguardar a resposta do cliente',
-        'success'
-    )
-    </script>
+        ?>
+
+        <script>
+        Swal.fire(
+            'Orçamento enviado com sucesso!',
+            'Vamos aguardar a resposta do cliente',
+            'success'
+        )
+        </script>
 
     <?php } ?>
 
 
-    <?php 
+    <?php
     if (isset($_POST["apagar"])) {
-        
-?>
 
-    <script>
-    Swal.fire(
-        'Apagado com sucesso!',
-        'Você apagou um projeto.',
-        'success'
-    )
-    </script>
+        ?>
+
+        <script>
+        Swal.fire(
+            'Apagado com sucesso!',
+            'Você apagou um projeto.',
+            'success'
+        )
+        </script>
 
     <?php } ?>
 
@@ -332,7 +312,5 @@ include_once "../conexao.php";
 
 </html>
 
-<!-- Daqui pra baixo vai o código que deverá enviar mensagem no whatsapp avisando, e salvar os trem no banco de dados !-->
 
 <?php
-

@@ -1,49 +1,43 @@
-<?php 
+<?php
 session_start();
 require_once "_autorize_admin.php";
-
 include_once "../conexao.php";
-
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-    <title>Administração</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
+    <title>RETENÇÃO DE ORÇAMENTOS</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="../imagens/brfavicon.ico" rel="icon" />
+
 
     <!-- Google Fonts -->
-    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
     <link
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+        rel="stylesheet" />
 
     <!-- Vendor CSS Files -->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet" />
 
     <!-- Template Main CSS File -->
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet" />
 
     <!-- =======================================================
   * Template Name: NiceAdmin - v2.4.1
@@ -59,9 +53,7 @@ include_once "../conexao.php";
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
-           
-            </a>
+            <a href="index.html" class="logo d-flex align-items-center"></a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
 
@@ -72,8 +64,8 @@ include_once "../conexao.php";
 
                 <li class="nav-item dropdown pe-3">
 
-                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        
+                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+
                         <span class="d-none d-md-block dropdown-toggle ps-2">Usuário</span>
                     </a><!-- End Profile Iamge Icon -->
 
@@ -109,58 +101,58 @@ include_once "../conexao.php";
 
         <section class="section dashboard">
             <?php
-                $sql = "SELECT * FROM login WHERE id = '$_GET[id]'";
-                $resultado = mysqli_query($conn, $sql);
+            $sql = "SELECT * FROM login WHERE id = '$_GET[id]'";
+            $resultado = mysqli_query($conn, $sql);
 
-                while ($dados = mysqli_fetch_assoc($resultado)) {
-                  
-            ?>
-            <form action="../scripts.php" method="POST">
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Nome completo</label>
-                    <input type="text" name="nome" value="<?php echo $dados["nome"]; ?>" class="form-control" id="exampleFormControlInput1">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Whatsapp</label>
-                    <input type="number" name="whatsapp" value="<?php echo $dados["whatsapp"]; ?>" class="form-control" id="exampleFormControlInput1">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">E-mail</label>
-                    <input type="email" name="email" value="<?php echo $dados["email"]; ?>" class="form-control" id="exampleFormControlInput1">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Senha</label>
-                    <input type="password" value="<?php echo $dados["senha"]; ?>" name="senha" class="form-control" id="exampleFormControlInput1">
-                    <input type="hidden" name="id" value="<?php echo $dados["id"]; ?>" class="form-control" id="exampleFormControlInput1">
+            while ($dados = mysqli_fetch_assoc($resultado)) {
 
-                </div>
-                <button type="submit" name="editaradmin" class="btn btn-primary float-end">Confirmar</button>
-            </form>
+                ?>
+                <form action="../scripts.php" method="POST">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Nome completo</label>
+                        <input type="text" name="nome" value="<?php echo $dados["nome"]; ?>" class="form-control" id="exampleFormControlInput1" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Whatsapp</label>
+                        <input type="number" name="whatsapp" value="<?php echo $dados["whatsapp"]; ?>" class="form-control" id="exampleFormControlInput1" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">E-mail</label>
+                        <input type="email" name="email" value="<?php echo $dados["email"]; ?>" class="form-control" id="exampleFormControlInput1" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Senha</label>
+                        <input type="password" value="<?php echo $dados["senha"]; ?>" name="senha" class="form-control" id="exampleFormControlInput1" />
+                        <input type="hidden" name="id" value="<?php echo $dados["id"]; ?>" class="form-control" id="exampleFormControlInput1" />
+
+                    </div>
+                    <button type="submit" name="editaradmin" class="btn btn-primary float-end">Confirmar</button>
+                </form>
             <?php } ?>
         </section>
-        <?php 
-if (isset($_GET["editaradmin"])) {
-  $resultado = $_GET["editaradmin"];
+        <?php
+        if (isset($_GET["editaradmin"])) {
+            $resultado = $_GET["editaradmin"];
 
-  if ($resultado == 200) {
-      echo "<script>
-      
+            if ($resultado == 200) {
+                echo "<script>
+
       Swal.fire(
-        'Cadastrado com sucesso',
-        'Clique em ok para continuar',
+        'Cadastrado com sucesso!',
+        '',
         'success'
       )
 
       </script>";
-  }
-}
-?>
+            }
+        }
+        ?>
     </main><!-- End #main -->
 
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer mt-5">
-    <div class="copyright">
-            &copy; Copyright <strong><span></span></strong>. Todos os direitos reservados
+        <div class="copyright">
+            &copy; Copyright. Todos os direitos reservados
         </div>
         <div class="credits">
             <!-- All the links in the footer should remain intact. -->
@@ -170,8 +162,10 @@ if (isset($_GET["editaradmin"])) {
         </div>
     </footer><!-- End Footer -->
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+        <i
+            class="bi bi-arrow-up-short"></i>
+    </a>
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>

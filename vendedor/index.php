@@ -1,18 +1,14 @@
-<?php 
+<?php
 session_start();
 require_once "_autorize_vendedor.php";
 include_once "../conexao.php";
-
-
-
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet"
@@ -22,13 +18,12 @@ include_once "../conexao.php";
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Jobs</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
+    <title>RETENÇÃO DE ORÇAMENTOS</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="../imagens/brfavicon.ico" rel="icon" />
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -58,22 +53,22 @@ include_once "../conexao.php";
 
 <body>
 
-    <?php 
+    <?php
     if (isset($_GET["jaorçado"])) {
 
         if ($_GET["jaorçado"] == 200) {
-           echo "<script>alert('projeto já orçado por outro desenvolvedor, não roube a vez do coleguinha.')</script>";
+            echo "<script>alert('projeto já orçado por outro desenvolvedor, não roube a vez do coleguinha.')</script>";
         }
-        
+
     }
     if (isset($_GET["orcamentoenviado"])) {
 
         if ($_GET["orcamentoenviado"] == 200) {
-           echo "<script>alert('Orçamento enviado com sucesso')</script>";
+            echo "<script>alert('Orçamento enviado com sucesso')</script>";
         }
-        
+
     }
-?>
+    ?>
 
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
@@ -95,7 +90,7 @@ include_once "../conexao.php";
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                      
-                        <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $_SESSION["email"]; ?></span>
+                        <span class="d-none d-md-block dropdown-toggle ps-2">Usuário</span>
                     </a><!-- End Profile Iamge Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -149,32 +144,32 @@ include_once "../conexao.php";
                                             class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                             <i class="bi bi-cart"></i>
                                         </div>
-                                        <?php 
-                                            
-                                            $sql = "SELECT * from projeto WHERE projeto.cliente LIKE '%$_SESSION[email]%' && status = 'orçado';";
-                                            $resultado = mysqli_query($conn, $sql);
+                                        <?php
 
-                                            $todos= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+                                        $sql = "SELECT * from projeto WHERE projeto.cliente LIKE '%$_SESSION[email]%' && status = 'orçado';";
+                                        $resultado = mysqli_query($conn, $sql);
 
-                                            // echo '<pre>';
-                                            // print_r($todos);
-                                            // echo '</pre>';
-                                            
-                                            $count= 0;
-                                            foreach ($todos as $key => $value) {
-                                                // $sql = "SELECT * from orcamentos WHERE projeto_id = " . $value['id'];
-                                                // $resultado = mysqli_query($conn, $sql);
+                                        $todos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
 
-                                                // if(!empty(mysqli_fetch_all($resultado)))
-                                                    $count++;
-                                            }
+                                        // echo '<pre>';
+                                        // print_r($todos);
+                                        // echo '</pre>';
+                                        
+                                        $count = 0;
+                                        foreach ($todos as $key => $value) {
+                                            // $sql = "SELECT * from orcamentos WHERE projeto_id = " . $value['id'];
+                                            // $resultado = mysqli_query($conn, $sql);
+                                        
+                                            // if(!empty(mysqli_fetch_all($resultado)))
+                                            $count++;
+                                        }
 
-                                            // if ($resultado = mysqli_query($conn, $sql)) {
-
-                                            //     // Return the number of rows in result set
-                                            //     $rowcount = mysqli_num_rows( $resultado );
-
-                                            // ?>
+                                        // if ($resultado = mysqli_query($conn, $sql)) {
+                                        
+                                        //     // Return the number of rows in result set
+                                        //     $rowcount = mysqli_num_rows( $resultado );
+                                        
+                                        // ?>
                                         <h6><?php echo $count ?></h6>
 
                                     </div>
@@ -196,19 +191,20 @@ include_once "../conexao.php";
                                             class="card-icon rounded-circle d-flex align-items-center justify-content-center ">
                                             <i class="bi bi-cart"></i>
                                         </div>
-                                        <?php     
-                                            
-                                            
-                                            $sql = "SELECT * from projeto WHERE cliente LIKE '%$_SESSION[email]%' AND status != 'orçado' AND status !='aguardando'";
+                                        <?php
 
-                                            if ($resultado = mysqli_query($conn, $sql)) {
 
-                                                // Return the number of rows in result set
-                                                $rowcount = mysqli_num_rows( $resultado );
+                                        $sql = "SELECT * from projeto WHERE cliente LIKE '%$_SESSION[email]%' AND status != 'orçado' AND status !='aguardando'";
+
+                                        if ($resultado = mysqli_query($conn, $sql)) {
+
+                                            // Return the number of rows in result set
+                                            $rowcount = mysqli_num_rows($resultado);
 
                                             ?>
-                                        <h6><?php echo $rowcount ?></h6>
-                                        <?php }; ?>
+                                            <h6><?php echo $rowcount ?></h6>
+                                        <?php }
+                                        ; ?>
                                     </div>
                                 </div>
 
@@ -225,18 +221,19 @@ include_once "../conexao.php";
                                             class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                             <i class="bi bi-cart"></i>
                                         </div>
-                                        <?php 
-                                            
-                                             $sql = "SELECT * from projeto WHERE cliente LIKE '%$_SESSION[email]%'";
+                                        <?php
 
-                                            if ($resultado = mysqli_query($conn, $sql)) {
+                                        $sql = "SELECT * from projeto WHERE cliente LIKE '%$_SESSION[email]%'";
 
-                                                // Return the number of rows in result set
-                                                 $rowcount = mysqli_num_rows( $resultado );
+                                        if ($resultado = mysqli_query($conn, $sql)) {
+
+                                            // Return the number of rows in result set
+                                            $rowcount = mysqli_num_rows($resultado);
 
                                             ?>
-                                        <h6><?php echo $rowcount ?></h6>
-                                        <?php }; ?>
+                                            <h6><?php echo $rowcount ?></h6>
+                                        <?php }
+                                        ; ?>
 
                                     </div>
                                 </div>
@@ -255,28 +252,28 @@ include_once "../conexao.php";
                                             class="card-icon rounded-circle d-flex align-items-center justify-content-center ">
                                             <i class="bi bi-cart"></i>
                                         </div>
-                                        <?php 
+                                        <?php
 
-                                            
-                                            $sql = "SELECT * FROM projeto WHERE status = 'aguardando' AND cliente LIKE '%$_SESSION[email]%' ORDER BY id DESC";
-                                            $total_nao_orcado= 0;
-                                            $resultado = mysqli_query($conn, $sql);
-                                                $dados= mysqli_fetch_all($resultado, MYSQLI_ASSOC);
-                                            foreach ($dados as $value) {
-                                                # code...
 
-                                                // $yx_sql = "SELECT * FROM orcamentos WHERE projeto_id = " . $value['id'];
-                                                // $yx_resultado = mysqli_query($conn, $yx_sql);
-                                                // $yx_dados= mysqli_fetch_all($yx_resultado);
+                                        $sql = "SELECT * FROM projeto WHERE status = 'aguardando' AND cliente LIKE '%$_SESSION[email]%' ORDER BY id DESC";
+                                        $total_nao_orcado = 0;
+                                        $resultado = mysqli_query($conn, $sql);
+                                        $dados = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+                                        foreach ($dados as $value) {
+                                            # code...
+                                        
+                                            // $yx_sql = "SELECT * FROM orcamentos WHERE projeto_id = " . $value['id'];
+                                            // $yx_resultado = mysqli_query($conn, $yx_sql);
+                                            // $yx_dados= mysqli_fetch_all($yx_resultado);
+                                        
+                                            // if(!empty($yx_dados)) {
+                                            //     continue;
+                                            // }
+                                            $total_nao_orcado++;
 
-                                                // if(!empty($yx_dados)) {
-                                                //     continue;
-                                                // }
-                                                $total_nao_orcado++;
+                                        }
 
-                                            }
-
-                                                echo "<div class='ps-3'>
+                                        echo "<div class='ps-3'>
                                                 <h6>$total_nao_orcado</h6>
                                                 </div>"
                                             ?>
@@ -309,38 +306,39 @@ include_once "../conexao.php";
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
-                                    $sql = "SELECT * FROM projeto WHERE status = 'Aguardando' AND cliente LIKE '%$_SESSION[email]%' ORDER BY id DESC";
-                                    $resultado = mysqli_query($conn, $sql);
+                                <?php
+                                $sql = "SELECT * FROM projeto WHERE status = 'Aguardando' AND cliente LIKE '%$_SESSION[email]%' ORDER BY id DESC";
+                                $resultado = mysqli_query($conn, $sql);
 
-                                    while ($dados = mysqli_fetch_assoc($resultado)) {
-                                        # code...
-
-                                        // $ax_sql = "SELECT * FROM orcamentos WHERE projeto_id = " . $dados['id'];
-                                        // $ax_resultado = mysqli_query($conn, $ax_sql);
-                                        // $ax_dados= mysqli_fetch_all($ax_resultado);
-
-                                        // if(!empty($ax_dados)) {
-                                        //     continue;
-                                        // }
+                                while ($dados = mysqli_fetch_assoc($resultado)) {
+                                    # code...
+                                
+                                    // $ax_sql = "SELECT * FROM orcamentos WHERE projeto_id = " . $dados['id'];
+                                    // $ax_resultado = mysqli_query($conn, $ax_sql);
+                                    // $ax_dados= mysqli_fetch_all($ax_resultado);
+                                
+                                    // if(!empty($ax_dados)) {
+                                    //     continue;
+                                    // }
+                                
+                                    ?>
+                                    <script>
+                                    function idHidden(id) {
+                                        $("#hidden").val(id);
+                                    }
+                                    </script>
+                                    <tr>
+                                        <td><?php echo $dados["nome"]; ?></td>
+                                        <td><a target="_blank" href="<?php echo $dados["briefing"]; ?>"><span
+                                                    class="material-symbols-outlined text-primary">description</a></span>
+                                        </td>
                                     
-                                ?>
-                                <script>
-                                function idHidden(id) {
-                                    $("#hidden").val(id);
-                                }
-                                </script>
-                                <tr>
-                                    <td><?php echo $dados["nome"]; ?></td>
-                                    <td><a target="_blank" href="<?php echo $dados["briefing"]; ?>"><span
-                                                class="material-symbols-outlined text-primary">description</a></span>
-                                    </td>
-                                    
-                                    <td><span class="badge bg-success"><?php echo $dados["status"]; ?></span></td>
-                                    <td><a href="../scripts.php?deletarprojetovendedor=<?php echo $dados["id"]; ?>" onclick="if(!confirm('Deseja realmente remover este projeto?')) event.preventDefault()"><span
-                                            class="material-symbols-outlined text-danger">delete</span></a></td>
-                                </tr>
-                                <?php }; ?>
+                                        <td><span class="badge bg-success"><?php echo $dados["status"]; ?></span></td>
+                                        <td><a href="../scripts.php?deletarprojetovendedor=<?php echo $dados["id"]; ?>" onclick="if(!confirm('Deseja realmente remover este projeto?')) event.preventDefault()"><span
+                                                class="material-symbols-outlined text-danger">delete</span></a></td>
+                                    </tr>
+                                <?php }
+                                ; ?>
                             </tbody>
                         </table>
 
@@ -423,7 +421,7 @@ include_once "../conexao.php";
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span></span></strong> Todos os direitos reservados.
+            &copy; Copyright. Todos os direitos reservados.
         </div>
         <div class="credits">
             <!-- All the links in the footer should remain intact. -->
@@ -436,35 +434,29 @@ include_once "../conexao.php";
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
-    <?php 
+    <?php
     if (isset($_POST["enviar"])) {
-        
-?>
-
-    <script>
-    Swal.fire(
-        'Orçamento enviado com sucesso!',
-        'Vamos aguardar a resposta do cliente',
-        'success'
-    )
-    </script>
-
+        ?>
+        <script>
+        Swal.fire(
+            'Orçamento enviado com sucesso!',
+            'Aguarde a resposta do cliente.',
+            'success'
+        )
+        </script>
     <?php } ?>
 
 
-    <?php 
+    <?php
     if (isset($_POST["apagar"])) {
-        
-?>
-
-    <script>
-    Swal.fire(
-        'Apagado com sucesso!',
-        'Você apagou um projeto.',
-        'success'
-    )
-    </script>
-
+        ?>
+        <script>
+        Swal.fire(
+            'Apagado com sucesso!',
+            '',
+            'success'
+        )
+        </script>
     <?php } ?>
 
 

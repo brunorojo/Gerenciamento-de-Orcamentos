@@ -640,10 +640,11 @@ if (isset($_POST["enviarvalor"])) {
 
    $lucroempresa = $valorcliente - $orcamento;
 
-   //   $sql = "UPDATE projeto SET desenvolvedor = '$desenvolvedor',
-   // valordev = '$orcamento', valorcliente = '$valorcliente', lucroempresa =
-   //  '$lucroempresa', status='orçado', dataentrega='$dataentrega' WHERE id = '$id'";
-   //   $resultado = mysqli_query($conn, $sql);
+   //codigo comentado
+   $sql = "UPDATE projeto SET desenvolvedor = '$desenvolvedor',
+    valordev = '$orcamento', valorcliente = '$valorcliente', lucroempresa =
+     '$lucroempresa', status='orçado', dataentrega='$dataentrega' WHERE id = '$id'";
+      $resultado = mysqli_query($conn, $sql);
 
    $dev_id = $_SESSION['id'];
 
@@ -936,7 +937,7 @@ if (isset($_GET["iniciarprojeto"])) {
                CURLOPT_FOLLOWLOCATION => true,
                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                CURLOPT_CUSTOMREQUEST => "POST",
-               CURLOPT_POSTFIELDS => ""
+               CURLOPT_POSTFIELDS => "",
                CURLOPT_HTTPHEADER => array(
                   "Content-Type: application/x-www-form-urlencoded"
                ),
@@ -1020,7 +1021,7 @@ if (isset($_GET["finalizarprojeto"])) {
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => ""
+            CURLOPT_POSTFIELDS => "",
             CURLOPT_HTTPHEADER => array(
                "Content-Type: application/x-www-form-urlencoded"
             ),

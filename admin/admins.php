@@ -1,33 +1,27 @@
-<?php 
+<?php
 session_start();
- require_once "_autorize_admin.php";
- include_once "../conexao.php";
-
-
+require_once "_autorize_admin.php";
+include_once "../conexao.php";
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Administração</title>
+    <title>RETENÇÃO DE ORÇAMENTOS</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="../imagens/brfavicon.ico" rel="icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -65,16 +59,11 @@ session_start();
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
-
                 <li class="nav-item dropdown pe-3">
-
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                       
                         <span class="d-none d-md-block dropdown-toggle ps-2">Usuário</span>
                     </a><!-- End Profile Iamge Icon -->
-
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-
                         <li>
                             <a class="dropdown-item d-flex align-items-center" href="../logout.php">
                                 <i class="bi bi-box-arrow-right"></i>
@@ -130,22 +119,23 @@ session_start();
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
-                                
+                                <?php
+
                                 $sql = "SELECT * FROM login WHERE nivel = 'admin'";
                                 $resultado = mysqli_query($conn, $sql);
 
                                 while ($dados = mysqli_fetch_assoc($resultado)) {
-                                    
-                                ?>
-                                <tr>
-                                    <td><?php echo $dados["nome"]; ?></td>
-                                    <td><?php echo $dados["whatsapp"]; ?></td>
-                                    <td><?php echo $dados["email"]; ?></td>
-                                    <td><a href="editaradmin.php?id=<?php echo $dados["id"]; ?>"><span class="material-symbols-outlined text-warning">edit</span></a></td>
-                                <td><a href="../scripts.php?deletaradmin=<?php echo $dados["id"]; ?>" onclick="if(!confirm('Deseja remover este admin?')) event.preventDefault()"><span class="material-symbols-outlined text-danger">delete</span></a></td>
-                                </tr>
-                                <?php }; ?>
+
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $dados["nome"]; ?></td>
+                                            <td><?php echo $dados["whatsapp"]; ?></td>
+                                            <td><?php echo $dados["email"]; ?></td>
+                                            <td><a href="editaradmin.php?id=<?php echo $dados["id"]; ?>"><span class="material-symbols-outlined text-warning">edit</span></a></td>
+                                        <td><a href="../scripts.php?deletaradmin=<?php echo $dados["id"]; ?>" onclick="if(!confirm('Deseja remover este admin?')) event.preventDefault()"><span class="material-symbols-outlined text-danger">delete</span></a></td>
+                                        </tr>
+                                <?php }
+                                ; ?>
                             </tbody>
                         </table>
 
@@ -174,7 +164,7 @@ session_start();
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span></span></strong>. Todos os direitos reservados
+            &copy; Copyright. Todos os direitos reservados.
         </div>
         <div class="credits">
             <!-- All the links in the footer should remain intact. -->
@@ -205,21 +195,16 @@ session_start();
 </html>
 
 <?php
-
 if (isset($_GET["editaradmin"])) {
     $editaradmin = $_GET["editaradmin"];
-  
     if ($editaradmin == 200) {
         echo "<script>
-        
         Swal.fire(
-          'Editado com sucesso',
-          'Envie o e-mail e a senha para o admin',
+          'Alterado com sucesso',
+          '',
           'success'
         )
-  
         </script>";
     }
-  }
-
+}
 ?>

@@ -1,41 +1,39 @@
 <?php
 session_start();
 require_once "_autorize_admin.php";
-
 include_once "../conexao.php";
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-    <title>Administração</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
+    <title>RETENÇÃO DE ORÇAMENTOS</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="../imagens/brfavicon.ico" rel="icon" />
 
     <!-- Google Fonts -->
-    <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
 
     <!-- Vendor CSS Files -->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet" />
 
     <!-- Template Main CSS File -->
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet" />
 
     <!-- =======================================================
   * Template Name: NiceAdmin - v2.4.1
@@ -51,9 +49,7 @@ include_once "../conexao.php";
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
-               
-            </a>
+            <a href="index.html" class="logo d-flex align-items-center"></a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
 
@@ -65,7 +61,7 @@ include_once "../conexao.php";
                 <li class="nav-item dropdown pe-3">
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        
+
                         <span class="d-none d-md-block dropdown-toggle ps-2">Usuário</span>
                     </a><!-- End Profile Iamge Icon -->
 
@@ -91,15 +87,19 @@ include_once "../conexao.php";
 
 
     <main id="main" class="main">
-        <a href="novadespesa.php"><button type="button" class="btn btn-primary float-end">Nova despesa</button></a>
+        <a href="novadespesa.php">
+            <button type="button" class="btn btn-primary float-end">Nova despesa</button>
+        </a>
 
         <div class="pagetitle">
             <h1>Despesas</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                    <li class="breadcrumb-item">
+                        <a href="index.php">Home</a>
+                    </li>
                     <li class="breadcrumb-item active">Despesas</li>
-                    
+
                 </ol>
             </nav>
         </div>
@@ -130,26 +130,35 @@ include_once "../conexao.php";
 
                             while ($dados = mysqli_fetch_assoc($resultado)) {
 
-                            ?>
+                                ?>
                                 <tr>
-                                    <td><?php echo $dados["nome"]; ?></td>
-                                    <td class="fw-semibold text-success"><?= number_format($dados["valor"], 2, ',', '.') ?></td>
-                                    <td><?php echo $dados["descricao"]; ?></td>
                                     <td>
-                                        <?php if ($dados["status_pagamento"]) :  ?>
+                                        <?php echo $dados["nome"]; ?>
+                                    </td>
+                                    <td class="fw-semibold text-success">
+                                        <?= number_format($dados["valor"], 2, ',', '.') ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $dados["descricao"]; ?>
+                                    </td>
+                                    <td>
+                                        <?php if ($dados["status_pagamento"]): ?>
                                             <span class="badge rounded-pill text-bg-success">Pago</span>
-                                        <?php else : ?>
+                                        <?php else: ?>
                                             <span class="badge rounded-pill text-bg-warning">Pendente</span>
                                         <?php endif; ?>
                                     </td>
-                                    <td><?= date('d/m/Y', strtotime($dados['data_pagamento'])) ?></td>
+                                    <td>
+                                        <?= date('d/m/Y', strtotime($dados['data_pagamento'])) ?>
+                                    </td>
                                     <td>
                                         <a class="link-success text-decoration-none" href="../scripts.php?confirmar_pagamento_despesa=true&despesa_id=<?= $dados['id'] ?>" onclick="if(!confirm('Confirmar este pagamento?')) event.preventDefault()">
                                             <span class="material-symbols-outlined text-success">done_all</span>
                                         </a>
                                     </td>
                                 </tr>
-                            <?php }; ?>
+                            <?php }
+                            ; ?>
                         </tbody>
                     </table>
 
@@ -163,7 +172,7 @@ include_once "../conexao.php";
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span></span></strong>. Todos os direitos reservados
+            &copy; Copyright. Todos os direitos reservados.
         </div>
         <div class="credits">
             <!-- All the links in the footer should remain intact. -->
@@ -173,7 +182,9 @@ include_once "../conexao.php";
         </div>
     </footer><!-- End Footer -->
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+        <i class="bi bi-arrow-up-short"></i>
+    </a>
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>

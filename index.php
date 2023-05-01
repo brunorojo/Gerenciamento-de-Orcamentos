@@ -1,21 +1,30 @@
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>RETENÇÃO DE ORÇAMENTOS</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="imagens/brfavicon.ico" rel="icon" />
+
     <!-- CUSTOM CSS -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
+
     <!-- FONT AWESOME -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
     <!-- GOOGLE FONTS -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet" />
 </head>
 
 <style>
     :root {
-        --bg-color: #f5f5f5;	
+        --bg-color: #f5f5f5;
         --bg-round-a: #1E537C;
         --bg-round-b: #1e537c;
         --panel-color: #fff;
@@ -702,53 +711,53 @@
 
                     <div class="input-field">
                         <i class="fas fa-envelope"></i>
-                        <input type="text" name="email" autocomplete="off" placeholder="E-mail" required="yes">
+                        <input type="text" name="email" autocomplete="off" placeholder="E-mail" required="yes" />
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input type="password" name="senha" autocomplete="off" placeholder="Senha" id="id_password" required="yes">
+                        <input type="password" name="senha" autocomplete="off" placeholder="Senha" id="id_password" required="yes" />
                         <i class="far fa-eye" id="togglePassword" style="cursor: pointer;"></i>
                     </div>
-                    <input type="submit" value="Entrar" name="logar" class="btn solid">
+                    <input type="submit" value="Entrar" name="logar" class="btn solid" />
                 </form>
 
-                
+
                 <form action="scripts.php" method="POST" class="sign-up-form">
                     <h2 class="title">Crie a sua conta</h2>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
-                        <input type="text" name="nome" autocomplete="off" placeholder="Nome completo" required="yes">
+                        <input type="text" name="nome" autocomplete="off" placeholder="Nome completo" required="yes" />
                     </div>
                     <div class="input-field">
                         <i class="fas fa-phone"></i>
-                        <input type="number" name="whatsapp" maxlength="10" autocomplete="off" placeholder="Whatsapp" required="no">
+                        <input type="number" name="whatsapp" maxlength="10" autocomplete="off" placeholder="Whatsapp" required="no" />
                     </div>
                     <div class="input-field">
                         <i class="fas fa-envelope"></i>
-                        <input type="email" name="email" autocomplete="off" placeholder="E-mail" required="yes">
+                        <input type="email" name="email" autocomplete="off" placeholder="E-mail" required="yes" />
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input type="password" name="senha" autocomplete="off" placeholder="Senha" id="id_reg" required="yes">
+                        <input type="password" name="senha" autocomplete="off" placeholder="Senha" id="id_reg" required="yes" />
                         <i class="far fa-eye" id="toggleReg" style="cursor: pointer;"></i>
                     </div>
-                    <br>
+                    <br />
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="opcao" value="Aguardando" id="flexRadioDefault1">
+                        <input class="form-check-input" type="radio" name="opcao" value="Aguardando" id="flexRadioDefault1" />
                         <label class="form-check-label" for="flexRadioDefault1">
                             Eu sou desenvolvedor
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" value="Aguardando" type="radio" name="opcao" id="flexRadioDefault2" checked>
+                        <input class="form-check-input" value="Aguardando" type="radio" name="opcao" id="flexRadioDefault2" checked />
                         <label class="form-check-label" for="flexRadioDefault2">
                             Eu sou vendedor
                         </label>
                     </div>
-                    <br>
-                    <input type="submit" value="Criar Conta" name="criar" class="btn solid">
+                    <br />
+                    <input type="submit" value="Criar Conta" name="criar" class="btn solid" />
                 </form>
-                
+
                 <?php
                 if (isset($_GET["resultado"])) {
                     $resultado = $_GET["resultado"];
@@ -757,7 +766,7 @@
                         echo "<script>
                             Swal.fire(
                             'Cadastro realizado com sucesso!',
-                            'Aguarde a aprovação de um dos administradores.',
+                            'Aguarde a aprovação do administrador.',
                             'success'
                             )
                             </script>";

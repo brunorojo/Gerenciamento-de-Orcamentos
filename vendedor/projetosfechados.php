@@ -1,18 +1,14 @@
-<?php 
+<?php
 session_start();
 require_once "_autorize_vendedor.php";
 include_once "../conexao.php";
-
-
-
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet"
@@ -22,13 +18,12 @@ include_once "../conexao.php";
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Jobs</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
+    <title>RETENÇÃO DE ORÇAMENTOS</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="../imagens/brfavicon.ico" rel="icon" />
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -58,22 +53,22 @@ include_once "../conexao.php";
 
 <body>
 
-    <?php 
+    <?php
     if (isset($_GET["jaorçado"])) {
 
         if ($_GET["jaorçado"] == 200) {
-           echo "<script>alert('projeto já orçado por outro desenvolvedor, não roube a vez do coleguinha.')</script>";
+            echo "<script>alert('projeto já orçado por outro desenvolvedor, não roube a vez do coleguinha.')</script>";
         }
-        
+
     }
     if (isset($_GET["orcamentoenviado"])) {
 
         if ($_GET["orcamentoenviado"] == 200) {
-           echo "<script>alert('Orçamento enviado com sucesso')</script>";
+            echo "<script>alert('Orçamento enviado com sucesso')</script>";
         }
-        
+
     }
-?>
+    ?>
 
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
@@ -95,7 +90,7 @@ include_once "../conexao.php";
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                        
-                        <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $_SESSION["email"]; ?></span>
+                        <span class="d-none d-md-block dropdown-toggle ps-2">Usuário</span>
                     </a><!-- End Profile Iamge Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -119,7 +114,6 @@ include_once "../conexao.php";
     <!-- ======= Sidebar ======= -->
     <?php include_once "sidebar.php"; ?>
 
-
     <main id="main" class="main">
 
         <div class="pagetitle">
@@ -127,7 +121,7 @@ include_once "../conexao.php";
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                    <li class="breadcrumb-item active">Projetos</li>
+                    <li class="breadcrumb-item active">Projetos Fechados</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -153,40 +147,41 @@ include_once "../conexao.php";
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php 
+                                    <?php
                                     $sql = "SELECT * FROM projeto WHERE status != 'orçado' AND status != 'aguardando' AND cliente LIKE '%$_SESSION[email]%' ORDER BY id DESC";
                                     $resultado = mysqli_query($conn, $sql);
 
                                     while ($dados = mysqli_fetch_assoc($resultado)) {
                                         # code...
                                     
-                                ?>
-                                    <script>
-                                    function idHidden(id) {
-                                        $("#hidden").val(id);
-                                    }
-                                    </script>
-                                    <tr>
-                                        <td><?php echo $dados["nome"]; ?></td>
-                                        <td><a href="<?php echo $dados["briefing"]; ?>"><span
-                                                    class="material-symbols-outlined text-primary">description</a></span>
-                                        </td>
+                                        ?>
+                                                    <script>
+                                                    function idHidden(id) {
+                                                        $("#hidden").val(id);
+                                                    }
+                                                    </script>
+                                                    <tr>
+                                                        <td><?php echo $dados["nome"]; ?></td>
+                                                        <td><a href="<?php echo $dados["briefing"]; ?>"><span
+                                                                    class="material-symbols-outlined text-primary">description</a></span>
+                                                        </td>
 
 
-                                        <td>
-                                        <?php echo $dados["desenvolvedor"]; ?>
-                                        </td>
-                                        <td>
-                                        <?php if($dados["dataentrega"] && $dados["status"] == 'aprovado' || $dados["status"] == 'iniciado' || $dados["status"] == 'finalizado' ): ?>
+                                                        <td>
+                                                        <?php echo $dados["desenvolvedor"]; ?>
+                                                        </td>
+                                                        <td>
+                                                        <?php if ($dados["dataentrega"] && $dados["status"] == 'aprovado' || $dados["status"] == 'iniciado' || $dados["status"] == 'finalizado'): ?>
 
-                                            <?= date('d/m/Y', strtotime($dados["data_inicio"] . " + " . ceil($dados["dataentrega"] ). " days")) ?>
+                                                                            <?= date('d/m/Y', strtotime($dados["data_inicio"] . " + " . ceil($dados["dataentrega"]) . " days")) ?>
 
-                                        <?php endif; ?>
-                                        </td>
-                                        <td><span class="badge bg-success"><?php echo $dados["status"]; ?></span></td>
+                                                        <?php endif; ?>
+                                                        </td>
+                                                        <td><span class="badge bg-success"><?php echo $dados["status"]; ?></span></td>
 
-                                    </tr>
-                                    <?php }; ?>
+                                                    </tr>
+                                    <?php }
+                                    ; ?>
                                 </tbody>
                             </table>
 
@@ -269,7 +264,7 @@ include_once "../conexao.php";
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span></span></strong> Todos os direitos reservados.
+            &copy; Copyright. Todos os direitos reservados.
         </div>
         <div class="credits">
             <!-- All the links in the footer should remain intact. -->
@@ -282,35 +277,29 @@ include_once "../conexao.php";
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
-    <?php 
+    <?php
     if (isset($_POST["enviar"])) {
-        
-?>
-
-    <script>
-    Swal.fire(
-        'Orçamento enviado com sucesso!',
-        'Vamos aguardar a resposta do cliente',
-        'success'
-    )
-    </script>
-
+        ?>
+                    <script>
+                    Swal.fire(
+                        'Orçamento enviado com sucesso!',
+                        'Aguarde a resposta do cliente.',
+                        'success'
+                    )
+                    </script>
     <?php } ?>
 
 
-    <?php 
+    <?php
     if (isset($_POST["apagar"])) {
-        
-?>
-
-    <script>
-    Swal.fire(
-        'Apagado com sucesso!',
-        'Você apagou um projeto.',
-        'success'
-    )
-    </script>
-
+        ?>
+                    <script>
+                    Swal.fire(
+                        'Apagado com sucesso!',
+                        '',
+                        'success'
+                    )
+                    </script>
     <?php } ?>
 
 
