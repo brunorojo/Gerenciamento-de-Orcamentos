@@ -22,7 +22,6 @@
                 <span>Clientes</span>
             </a>
         </li>
-       
         <li class="nav-item">
             <a class="nav-link collapsed gap-2" href="admins.php">
                 <span class="material-symbols-outlined">

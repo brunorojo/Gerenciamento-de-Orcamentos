@@ -83,7 +83,7 @@ include_once "../conexao.php";
     </header><!-- End Header -->
 
     <!-- ======= Sidebar ======= -->
-    <?php include_once "sadbar.php" ?>
+    <?php include_once "sidebar.php" ?>
 
 
     <main id="main" class="main">

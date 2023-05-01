@@ -3,6 +3,7 @@ session_start();
 require_once "_autorize_dev.php";
 include_once "../conexao.php";
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -129,7 +130,7 @@ include_once "../conexao.php";
 
     <!-- ======= Sidebar ======= -->
 
-    <?php include_once "sadbar.php"; ?>
+    <?php include_once "sidebar.php"; ?>
 
     <!-- End Sidebar-->
 

@@ -93,7 +93,7 @@ if (isset($_GET["resultado"])) {
 
     </header><!-- End Header -->
 
-    <?php include_once "sadbar.php" ?>
+    <?php include_once "sidebar.php" ?>
 
     <main id="main" class="main">
         <div class="pagetitle">
