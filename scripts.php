@@ -20,19 +20,24 @@ include_once "conexao.php";
 if (isset($_POST["logar"])) {
    $email = $_POST["email"];
    $senha = $_POST["senha"];
+   
    $niveis = ['admin', 'dev', 'vendedor', 'bloq', 'Aguardando'];
    $redirects = ['admin/', 'desenvolvedor/', 'vendedor/', 'index.php?id=500', 'index.php?id=600'];
 
    foreach ($niveis as $index => $nivel) {
-      $sql = "SELECT * FROM login WHERE email = '$email' AND senha = '$senha' AND nivel = '$nivel';";
+      $sql = "SELECT * FROM login WHERE email = '$email' AND senha = '$senha' AND nivel = '$nivel' and status=0;";
       $resultado = mysqli_query($conn, $sql);
 
       if (mysqli_num_rows($resultado) > 0) {
+         $dados = mysqli_fetch_assoc($resultado);
          $_SESSION["logado"] = "logado";
          $_SESSION['usuario'] = $nivel;
+         $_SESSION['nome'] = $dados['nome'];
+         // $_SESSION['usuario'] = $nivel;
+      
 
          if ($nivel === 'dev' || $nivel === 'vendedor') {
-            $dados = mysqli_fetch_assoc($resultado);
+            
             $_SESSION['email'] = $dados["nome"];
             $_SESSION['id'] = $dados["id"];
          }
@@ -51,15 +56,32 @@ if (isset($_POST["criar"])) {
    $email = $_POST["email"];
    $senha = $_POST["senha"];
    $nivel = $_POST["opcao"];
+   $status=1;
    $_SESSION['email'] = $nome;
    $desenvolvedor = $_SESSION['email'];
+
+   $buscaEmail="SELECT * FROM login WHERE email = '$email'";
+   $resultbusca= mysqli_query($conn, $buscaEmail);
+
+   if (mysqli_num_rows($resultbusca) > 0) {
+
+      echo "
+      <script>
+       window.location.href = 'index.php?resultado=400';
+      </script>
+   ";
+
+   exit();
+
+   }
+
 
    if ($nivel == 'vendedor') {
       $sql = "INSERT INTO vendedor (nome, whatsapp, email) VALUES ('$nome', '$whatsapp', '$email')";
       $resultado = mysqli_query($conn, $sql);
    }
-
-   $sql = "INSERT INTO login (nome, whatsapp, email, senha, nivel) VALUES ('$nome', '$whatsapp', '$email', '$senha', '$nivel')";
+   
+   $sql = "INSERT INTO login (nome, whatsapp, email, senha, nivel, status) VALUES ('$nome', '$whatsapp', '$email', '$senha', '$nivel', '1')";
    $resultado = mysqli_query($conn, $sql);
 
    if (isset($resultado)) {
@@ -97,50 +119,36 @@ if (isset($_POST["cadastraradmin"])) {
 if (isset($_POST["cadastrarprojeto"])) {
    $nome = $_POST["nome"];
    $cliente = $_POST["cliente"];
-   $briefing = $_POST["briefing"];
+   $briefingpuro = $_POST["briefing"];
+   $briefing= str_replace(" ", "", $briefingpuro);
    $data = date("Y-m-d");
    $sql = "INSERT INTO projeto (nome, cliente, briefing, status, data_inicio) VALUES ('$nome', '$cliente', '$briefing', 'Aguardando', '$data')";
    $resultado = mysqli_query($conn, $sql);
 
-   if (isset($resultado)) {
-      $sql = "SELECT whatsapp FROM login WHERE nivel = 'dev'";
-      $resultado = mysqli_query($conn, $sql);
-      while ($dados = mysqli_fetch_assoc($resultado)) {
-         if($api_whats_habilitada):
-         $curl = curl_init();
-         curl_setopt_array($curl, array(
-            CURLOPT_URL => $url_point_whats,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "",
-        CURLOPT_HTTPHEADER => array(   "Content-Type: application/x-www-form-urlencoded"  ),
-   ));
-
-   $response = curl_exec($curl);
-
-   curl_close($curl);
-   echo $response;
-endif;
-
-      }
-
+   if($resultado){
       echo "
-         <script>
-         window.location.href = 'admin/novoprojeto.php?resultado=200';
-         </script>
-      ";
+      <script>
+      window.location.href = 'admin/novoprojeto.php?resultado=200';
+      </script>
+   ";
+
+   }else{
+      echo "erro".mysqli_error($conn);
    }
-}
+     
+
+      
+   }
+
 
 // tela de cadastro de projetos de vendedores
 if (isset($_POST["cadastrarprojetovendedor"])) {
    $nome = $_POST["nome"];
    $briefing = $_POST["briefing"];
+   $briefingpuro = $_POST["briefing"];
+   $briefing= str_replace(" ", "", $briefingpuro);
+
+   
    $data = date("d-m-y");
    $sql = "INSERT INTO projeto (nome, cliente, briefing, status, data_inicio) VALUES ('$nome', ' $_SESSION[email]', '$briefing', 'Aguardando', '$data')";
    $resultado = mysqli_query($conn, $sql);
@@ -583,7 +591,7 @@ if (isset($_POST["editaradmin"])) {
 if (isset($_POST["enviarvalor"])) {
 
    $id = $_POST["id"];
-
+ 
 
    $sql = "SELECT * FROM projeto WHERE id = '$id'";
    $resultado = mysqli_query($conn, $sql);
@@ -715,33 +723,7 @@ if (isset($_POST["enviarvalor"])) {
    $sql = "SELECT whatsapp FROM cliente WHERE nome = '$cliente'";
    $resultado = mysqli_query($conn, $sql);
 
-   while ($dados = mysqli_fetch_assoc($resultado)) {
-
-      if($api_whats_habilitada):
-      $curl = curl_init();
-
-      curl_setopt_array($curl, array(
-         CURLOPT_URL => $url_point_whats,
-         CURLOPT_RETURNTRANSFER => true,
-         CURLOPT_ENCODING => "",
-         CURLOPT_MAXREDIRS => 10,
-         CURLOPT_TIMEOUT => 0,
-         CURLOPT_FOLLOWLOCATION => true,
-         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-         CURLOPT_CUSTOMREQUEST => "POST",
-         CURLOPT_POSTFIELDS => "",
-         CURLOPT_HTTPHEADER => array(
-            "Content-Type: application/x-www-form-urlencoded"
-         ),
-      ));
-
-      $response = curl_exec($curl);
-
-      curl_close($curl);
-      echo $response;
-   endif;
-   }
-
+   
 
    echo "
 
@@ -837,31 +819,7 @@ if (isset($_GET["aprovarprojeto"])) {
          $nome = $dados["nome"];
       }
 
-      if($api_whats_habilitada):
-      $curl = curl_init();
-
-
-      curl_setopt_array($curl, array(
-         CURLOPT_URL => $url_point_whats,
-         CURLOPT_RETURNTRANSFER => true,
-         CURLOPT_ENCODING => "",
-         CURLOPT_MAXREDIRS => 10,
-         CURLOPT_TIMEOUT => 0,
-         CURLOPT_FOLLOWLOCATION => true,
-         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-         CURLOPT_CUSTOMREQUEST => "POST",
-         CURLOPT_POSTFIELDS => "",
-         CURLOPT_HTTPHEADER => array(
-            "Content-Type: application/x-www-form-urlencoded"
-         ),
-      ));
-
-      $response = curl_exec($curl);
-
-      curl_close($curl);
-      echo $response;
-   endif;
-
+      
    if($_SESSION['usuario'] == 'admin'):
       echo "
         <script>
@@ -872,7 +830,7 @@ if (isset($_GET["aprovarprojeto"])) {
    if($_SESSION['usuario'] == 'vendedor'):
       echo "
         <script>
-               window.location.href = '/vendedor/seusprojetos.php?aprovado=200';
+               window.location.href = 'vendedor/projetosfechados.php?aprovado=200';
          </script>
       ";
    endif;
@@ -893,14 +851,17 @@ if (isset($_GET["iniciarprojeto"])) {
    while ($dados = mysqli_fetch_assoc($resultado)) {
       $valordev = $dados["valordev"];
       if($dados["status"] == 'Aguardando' || $dados["status"] == 'orçado') {
-         echo "Esse projeto ainda não foi aprovado!";
+        echo" <script>
+       window.location.href = 'desenvolvedor/seusprojetos.php?resultado=550';
+      </script>";
+         // echo "Esse projeto ainda não foi aprovado!";
          exit;
       }
    }
    if ($valordev == '0') {
       echo "<script>
             alert('Você deve orçar o projeto antes de inciar');
-                      window.location.href = 'desenvolvedor/index.php';
+                      window.location.href = 'desenvolvedor/seusprojetos.php';
 
        </script>";
    } else {
@@ -920,35 +881,7 @@ if (isset($_GET["iniciarprojeto"])) {
          $sql = "SELECT * FROM login WHERE nivel = 'admin'";
          $resultado = mysqli_query($conn, $sql);
 
-         while ($dados = mysqli_fetch_assoc($resultado)) {
-
-            $whatsapp = $dados["whatsapp"];
-            $nome = $dados["nome"];
-
-            if($api_whats_habilitada):
-            $curl = curl_init();
-
-            curl_setopt_array($curl, array(
-               CURLOPT_URL => $url_point_whats,
-               CURLOPT_RETURNTRANSFER => true,
-               CURLOPT_ENCODING => "",
-               CURLOPT_MAXREDIRS => 10,
-               CURLOPT_TIMEOUT => 0,
-               CURLOPT_FOLLOWLOCATION => true,
-               CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-               CURLOPT_CUSTOMREQUEST => "POST",
-               CURLOPT_POSTFIELDS => "",
-               CURLOPT_HTTPHEADER => array(
-                  "Content-Type: application/x-www-form-urlencoded"
-               ),
-            ));
-
-            $response = curl_exec($curl);
-
-            curl_close($curl);
-            echo $response;
-         endif;
-         }
+       
 
 
          echo "
@@ -956,7 +889,7 @@ if (isset($_GET["iniciarprojeto"])) {
          <script>
 
 
-          window.location.href = 'desenvolvedor/index.php?iniciado=200';
+          window.location.href = 'desenvolvedor/seusprojetos.php?iniciado=200';
 
 
          </script>
@@ -981,7 +914,9 @@ if (isset($_GET["finalizarprojeto"])) {
    while ($dados = mysqli_fetch_assoc($resultado)) {
       $valordev = $dados["valordev"];
       if($dados["status"] == 'Aguardando' || $dados["status"] == 'orçado') {
-         echo "Esse projeto ainda não foi aprovado!";
+         echo" <script>
+         window.location.href = 'desenvolvedor/seusprojetos.php?resultado=550';
+        </script>";
          exit;
       }
    }
@@ -1040,7 +975,7 @@ if (isset($_GET["finalizarprojeto"])) {
      <script>
 
 
-      window.location.href = 'desenvolvedor/index.php?iniciado=200';
+      window.location.href = 'desenvolvedor/seusprojetos.php?iniciado=200';
 
 
      </script>
@@ -1253,7 +1188,7 @@ if (isset($_POST["extrairperdidos"])) {
 if (isset($_GET["bloqueardev"])) {
    $id = $_GET["bloqueardev"];
 
-   $sql = "UPDATE login SET nivel = 'bloq' WHERE id = '$id'";
+   $sql = "UPDATE login SET status = 1 WHERE id = '$id'";
    $resultado = mysqli_query($conn, $sql);
 
    echo "<script>
@@ -1269,7 +1204,7 @@ if (isset($_GET["bloqueardev"])) {
 if (isset($_GET["aprovardev"])) {
    $id = $_GET["aprovardev"];
 
-   $sql = "UPDATE login SET nivel = 'dev' WHERE id = '$id'";
+   $sql = "UPDATE login SET status = 0  WHERE id = '$id'";
    $resultado = mysqli_query($conn, $sql);
 
    echo "<script>

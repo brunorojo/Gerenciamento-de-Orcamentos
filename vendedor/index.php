@@ -1,57 +1,10 @@
 <?php
 session_start();
 require_once "_autorize_vendedor.php";
-include_once "../conexao.php";
+include_once "../header.php";
 ?>
 
-<!DOCTYPE html>
-<html lang="pt-BR">
 
-<head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-    <title>RETENÇÃO DE ORÇAMENTOS</title>
-    <meta content="" name="description" />
-    <meta content="" name="keywords" />
-
-    <!-- Favicons -->
-    <link href="../imagens/brfavicon.ico" rel="icon" />
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
-
-    <!-- Vendor CSS Files -->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
-    <!-- Template Main CSS File -->
-    <link href="assets/css/style.css" rel="stylesheet">
-
-    <!-- =======================================================
-  * Template Name: NiceAdmin - v2.4.1
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-</head>
-
-<body>
 
     <?php
     if (isset($_GET["jaorçado"])) {
@@ -69,50 +22,6 @@ include_once "../conexao.php";
 
     }
     ?>
-
-    <!-- ======= Header ======= -->
-    <header id="header" class="header fixed-top d-flex align-items-center">
-
-        <div class="d-flex align-items-center justify-content-between">
-            <a href="index.php" class="logo d-flex align-items-center">
-                <span class="d-none d-lg-block"></span>
-            </a>
-            <i class="bi bi-list toggle-sidebar-btn"></i>
-        </div><!-- End Logo -->
-
-
-
-        <nav class="header-nav ms-auto">
-            <ul class="d-flex align-items-center">
-
-
-                <li class="nav-item dropdown pe-3">
-
-                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                     
-                        <span class="d-none d-md-block dropdown-toggle ps-2">Usuário</span>
-                    </a><!-- End Profile Iamge Icon -->
-
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="../logout.php">
-                                <i class="bi bi-box-arrow-right"></i>
-                                <span>Sair</span>
-                            </a>
-                        </li>
-
-                    </ul><!-- End Profile Dropdown Items -->
-                </li><!-- End Profile Nav -->
-
-            </ul>
-        </nav><!-- End Icons Navigation -->
-
-    </header><!-- End Header -->
-
-    <!-- ======= Sidebar ======= -->
-    <?php include_once "sidebar.php"; ?>
 
     <main id="main" class="main">
         <a href="novoprojeto.php"><button type="button" class="btn btn-primary float-end">Novo Projeto</button></a>
@@ -151,23 +60,14 @@ include_once "../conexao.php";
 
                                         $todos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
 
-                                        // echo '<pre>';
-                                        // print_r($todos);
-                                        // echo '</pre>';
                                         
                                         $count = 0;
                                         foreach ($todos as $key => $value) {
-                                            // $sql = "SELECT * from orcamentos WHERE projeto_id = " . $value['id'];
-                                            // $resultado = mysqli_query($conn, $sql);
-                                        
-                                            // if(!empty(mysqli_fetch_all($resultado)))
+                                       
                                             $count++;
                                         }
 
-                                        // if ($resultado = mysqli_query($conn, $sql)) {
-                                        
-                                        //     // Return the number of rows in result set
-                                        //     $rowcount = mysqli_num_rows( $resultado );
+                                     
                                         
                                         // ?>
                                         <h6><?php echo $count ?></h6>
@@ -262,13 +162,6 @@ include_once "../conexao.php";
                                         foreach ($dados as $value) {
                                             # code...
                                         
-                                            // $yx_sql = "SELECT * FROM orcamentos WHERE projeto_id = " . $value['id'];
-                                            // $yx_resultado = mysqli_query($conn, $yx_sql);
-                                            // $yx_dados= mysqli_fetch_all($yx_resultado);
-                                        
-                                            // if(!empty($yx_dados)) {
-                                            //     continue;
-                                            // }
                                             $total_nao_orcado++;
 
                                         }
@@ -313,14 +206,6 @@ include_once "../conexao.php";
                                 while ($dados = mysqli_fetch_assoc($resultado)) {
                                     # code...
                                 
-                                    // $ax_sql = "SELECT * FROM orcamentos WHERE projeto_id = " . $dados['id'];
-                                    // $ax_resultado = mysqli_query($conn, $ax_sql);
-                                    // $ax_dados= mysqli_fetch_all($ax_resultado);
-                                
-                                    // if(!empty($ax_dados)) {
-                                    //     continue;
-                                    // }
-                                
                                     ?>
                                     <script>
                                     function idHidden(id) {
@@ -347,18 +232,8 @@ include_once "../conexao.php";
                 </div>
             </div><!-- End Recent Sales -->
 
-
-
             </div>
             </div><!-- End Left side columns -->
-
-
-
-
-
-
-
-
 
             </div>
             </div><!-- End News & Updates -->
@@ -418,21 +293,7 @@ include_once "../conexao.php";
         </div>
 
     </div>
-    <!-- ======= Footer ======= -->
-    <footer id="footer" class="footer">
-        <div class="copyright">
-            &copy; Copyright. Todos os direitos reservados.
-        </div>
-        <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-        </div>
-    </footer><!-- End Footer -->
-
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+   
 
     <?php
     if (isset($_POST["enviar"])) {
@@ -460,23 +321,14 @@ include_once "../conexao.php";
     <?php } ?>
 
 
-    <!-- Vendor JS Files -->
-    <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/chart.js/chart.min.js"></script>
-    <script src="assets/vendor/echarts/echarts.min.js"></script>
-    <script src="assets/vendor/quill/quill.min.js"></script>
-    <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-    <script src="assets/vendor/tinymce/tinymce.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <?php 
+    $total_despesas_empresa =0;
+    include ('../footer.php');
 
-    <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
-
+?>
 </body>
 
 </html>
 
-<!-- Daqui pra baixo vai o código que deverá enviar mensagem no whatsapp avisando, e salvar os trem no banco de dados !-->
 
-<?php
+
