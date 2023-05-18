@@ -76,21 +76,15 @@ CREATE TABLE IF NOT EXISTS `login`(
 -- Extraindo dados da tabela `login`
 INSERT INTO `login`(`id`,`nome`,`whatsapp`,`email`,`senha`,`nivel`,`status`)
 VALUES
-(1,'Bruno Rojo','11999887766', 'bruno@rojo.com', '123', 'admin', 0),
-(2,'Admin 01','11920201111', 'admin01@gmail.com', '123', 'admin', 0),
-(3,'Admin 02','11920202222', 'admin02@gmail.com', '123', 'admin', 0),
-(4,'Admin 03','11920203333', 'admin03@gmail.com', '123', 'admin', 0),
-(5,'Admin 04','11920204444', 'admin04@gmail.com', '123', 'admin', 0),
-(6,'Vendedor 01', '11990901111', 'vendedor01@gmail.com', '123', 'vendedor', 0),
-(7,'Vendedor 02', '11990902222', 'vendedor02@gmail.com', '123', 'vendedor', 0),
-(8,'Vendedor 03', '11990903333', 'vendedor03@gmail.com', '123', 'vendedor', 0),
-(9,'Vendedor 04', '11990904444', 'vendedor04@gmail.com', '123', 'vendedor', 0),
-(10,'Vendedor Bloq', '119909055555', 'vendedorbloq@gmail.com', '123', 'vendedor', 1),
-(11, 'Desenv 01','11970701111','desenv01@gmail.com', '123',  'dev', 0),
-(12,'Desenv 02','11970701122','desenv02@gmail.com', '123',  'dev', 0),
-(13,'Desenv 03','11970701133','desenv03@gmail.com', '123',  'dev', 0),
-(14,'Desenv 04','11970701144','desenv04@gmail.com', '123',  'dev', 0),
-(15,'Desenv Bloq','119707055555','desenvbloq@gmail.com', '123',  'dev', 1);
+(1,'Bruno Rojo','11999887766', 'bruno@rojo.com', 'rojo@304050', 'admin', 0),
+(2,'Admin 01','11920201111', 'admin01@gmail.com', 'adm01@304050', 'admin', 0),
+(3,'Admin 02','11920202222', 'admin02@gmail.com', 'adm02@304050', 'admin', 0),
+(4,'Vendedor 01', '11990901111', 'vendedor01@gmail.com', 'vendedor01@304050', 'vendedor', 0),
+(5,'Vendedor 02', '11990902222', 'vendedor02@gmail.com', 'vendedor02@304050', 'vendedor', 0),
+(6,'Vendedor Bloq', '119909055555', 'vendedorbloq@gmail.com', 'vendedorbloq@304050', 'vendedor', 1),
+(7, 'Desenv 01','11970701111','desenv01@gmail.com', 'desenv01@304050',  'dev', 0),
+(8,'Desenv 02','11970701122','desenv02@gmail.com', 'desenv02@304050',  'dev', 0),
+(9,'Desenv Bloq','119707055555','desenvbloq@gmail.com', 'desenvbloq@304050',  'dev', 1);
 
 
 -- --------------------------------------------------------
