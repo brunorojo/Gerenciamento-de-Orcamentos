@@ -5,7 +5,7 @@ include_once "../header.php";
 ?>
 
 
-    <?php
+<?php
     if (isset($_GET["jaorçado"])) {
 
         if ($_GET["jaorçado"] == 200) {
@@ -22,22 +22,22 @@ include_once "../header.php";
     }
     ?>
 
-    <main id="main" class="main">
+<main id="main" class="main">
 
-        <div class="pagetitle">
-            <h1>Projetos não orçados</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                    <li class="breadcrumb-item active">Projetos não orçados</li>
-                </ol>
-            </nav>
-        </div><!-- End Page Title -->
+    <div class="pagetitle">
+        <h1>Projetos não orçados</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                <li class="breadcrumb-item active">Projetos não orçados</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
 
-        <section class="section dashboard">
-            <div class="row">
+    <section class="section dashboard">
+        <div class="row">
 
-               
+
 
             <!-- Recent Sales -->
             <div class="col-12">
@@ -61,17 +61,19 @@ include_once "../header.php";
                                     # code...
                                 
                                     ?>
-                                    <script>
-                                    function idHidden(id) {
-                                        $("#hidden").val(id);
-                                    }
-                                    </script>
-                                    <tr>
-                                        <td><?php echo $dados["nome"]; ?></td>
-                                        <td><a href="<?php echo $dados["briefing"]; ?>" target="_blank"> <span class="material-symbols-outlined text-primary">description</a></span></td>
-                                        <td><span class="badge bg-success"><?php echo $dados["status"]; ?></span></td>
+                                <script>
+                                function idHidden(id) {
+                                    $("#hidden").val(id);
+                                }
+                                </script>
+                                <tr>
+                                    <td><?php echo $dados["nome"]; ?></td>
+                                    <td><a href="<?php echo $dados["briefing"]; ?>" target="_blank"> <span
+                                                class="material-symbols-outlined text-primary">description</a></span>
+                                    </td>
+                                    <td><span class="badge bg-success"><?php echo $dados["status"]; ?></span></td>
 
-                                    </tr>
+                                </tr>
                                 <?php }
                                 ; ?>
                             </tbody>
@@ -84,109 +86,108 @@ include_once "../header.php";
 
 
 
-            </div>
-            </div><!-- End Left side columns -->
-
-
-
-
-
-
-
-
-
-            </div>
-            </div><!-- End News & Updates -->
-
-            </div><!-- End Right side columns -->
-
-            </div>
-        </section>
-
-    </main><!-- End #main -->
-    <!-- Modal orçamento !-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Enviar orçamento</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="../scripts.php" method="POST">
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Quantas horas você acredita que
-                                gastará?</label>
-                            <input type="number" name="horas" required="" id="um" class="form-control"
-                                id="recipient-name">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Você receberá:</label>
-                            <input type="number" readonly="on" id="dois" class="form-control" id="recipient-name">
-                        </div>
-                        <input type="hidden" name="id" id="hidden" value="">
-                        <script>
-                        function trim(str) {
-                            return str.replace(/[^a-zA-Z0-9]/g, '')
-                        }
-
-                        let input = document.getElementById('um')
-                        let input2 = document.getElementById('dois')
-
-
-                        input.onkeyup = function() {
-                            if (input.value < 20) {
-                                input2.value = trim(input.value) * 25
-                                exit();
-                            } else {
-                                input2.value = trim(input.value) * 17
-                            }
-                        }
-                        </script>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success" name="enviarvalor">Enviar</button>
-                </div>
-            </div>
-            </form>
         </div>
+        </div><!-- End Left side columns -->
 
+
+
+
+
+
+
+
+
+        </div>
+        </div><!-- End News & Updates -->
+
+        </div><!-- End Right side columns -->
+
+        </div>
+    </section>
+
+</main><!-- End #main -->
+<!-- Modal orçamento !-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Enviar orçamento</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="../scripts.php" method="POST">
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Quantas horas você acredita que
+                            gastará?</label>
+                        <input type="number" name="horas" required="" id="um" class="form-control" id="recipient-name">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Você receberá:</label>
+                        <input type="number" readonly="on" id="dois" class="form-control" id="recipient-name">
+                    </div>
+                    <input type="hidden" name="id" id="hidden" value="">
+                    <script>
+                    function trim(str) {
+                        return str.replace(/[^a-zA-Z0-9]/g, '')
+                    }
+
+                    let input = document.getElementById('um')
+                    let input2 = document.getElementById('dois')
+
+
+                    input.onkeyup = function() {
+                        if (input.value < 20) {
+                            input2.value = trim(input.value) * 25
+                            exit();
+                        } else {
+                            input2.value = trim(input.value) * 17
+                        }
+                    }
+                    </script>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" name="enviarvalor">Enviar</button>
+            </div>
+        </div>
+        </form>
     </div>
-  
 
-    <?php
+</div>
+
+
+<?php
     if (isset($_POST["enviar"])) {
 
         ?>
 
-        <script>
-        Swal.fire(
-            'Orçamento enviado com sucesso!',
-            'Aguarde a resposta do cliente.',
-            'success'
-        )
-        </script>
+<script>
+Swal.fire(
+    'Orçamento enviado com sucesso!',
+    'Aguarde a resposta do cliente.',
+    'success'
+)
+</script>
 
-    <?php } ?>
+<?php } ?>
 
 
-    <?php
+<?php
     if (isset($_POST["apagar"])) {
 
         ?>
 
-        <script>
-        Swal.fire(
-            'Apagado com sucesso!',
-            '',
-            'success'
-        )
-        </script>
+<script>
+Swal.fire(
+    'Apagado com sucesso!',
+    '',
+    'success'
+)
+</script>
 
-    <?php } ?>
+<?php } ?>
 
-    <?php 
+<?php 
     $total_despesas_empresa =0;
     include ('../footer.php');
 

@@ -5,51 +5,52 @@ include_once "../header.php";
 ?>
 
 
-    <main id="main" class="main">
+<main id="main" class="main">
 
-        <div class="pagetitle">
-            <h1>Cadastro de Despesas</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item active">
-                        Desde pagamento de desenvolvedores até o salário no final do mês
-                    </li>
-                </ol>
-            </nav>
-        </div><!-- End Page Title -->
+    <div class="pagetitle">
+        <h1>Cadastro de Despesas</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active">
+                    Desde pagamento de desenvolvedores até o salário no final do mês
+                </li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
 
-        <section class="section dashboard">
-            <form action="../scripts.php" method="POST">
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Nome da despesa</label>
-                    <input type="text" name="nome" class="form-control" id="exampleFormControlInput1" />
-                </div>
-                <div class="mb-3">
-                    <label for="valor-despesa" class="form-label">Valor total da despesa</label>
-                    <input type="number" name="valor" class="form-control" id="valor-despesa" />
-                </div>
-                <div class="mb-3">
-                    <label for="total-parcelas" class="form-label">Total de parcelas</label>
-                    <input type="number" name="total_parcelas" class="form-control" id="total-parcelas" value="" required />
-                </div>
-
-
-                <!-- Parcelas -->
-                <div id="parcelas">
-                    <!-- inner parcelas -->
-                </div>
+    <section class="section dashboard">
+        <form action="../scripts.php" method="POST">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Nome da despesa</label>
+                <input type="text" name="nome" class="form-control" id="exampleFormControlInput1" />
+            </div>
+            <div class="mb-3">
+                <label for="valor-despesa" class="form-label">Valor total da despesa</label>
+                <input type="number" name="valor" class="form-control" id="valor-despesa" />
+            </div>
+            <div class="mb-3">
+                <label for="total-parcelas" class="form-label">Total de parcelas</label>
+                <input type="number" name="total_parcelas" class="form-control" id="total-parcelas" value="" required />
+            </div>
 
 
-                <div class="form-floating">
-                    <textarea name="descricao" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-                    <label for="floatingTextarea2">Descrição da despesa</label>
+            <!-- Parcelas -->
+            <div id="parcelas">
+                <!-- inner parcelas -->
+            </div>
 
-                </div>
-                <button type="submit" name="cadastrardespesa" class="btn btn-primary float-end mt-3">Cadastrar</button>
-            </form>
-        </section>
 
-        <?php
+            <div class="form-floating">
+                <textarea name="descricao" class="form-control" placeholder="Leave a comment here"
+                    id="floatingTextarea2" style="height: 100px"></textarea>
+                <label for="floatingTextarea2">Descrição da despesa</label>
+
+            </div>
+            <button type="submit" name="cadastrardespesa" class="btn btn-primary float-end mt-3">Cadastrar</button>
+        </form>
+    </section>
+
+    <?php
         if (isset($_GET["resultado"])) {
             $resultado = $_GET["resultado"];
             if ($resultado == 200) {
@@ -61,50 +62,50 @@ include_once "../header.php";
         ?>
 
 
-    </main><!-- End #main -->
+</main><!-- End #main -->
 
-    <?php 
+<?php 
     $total_despesas_empresa =0;
     include ('../footer.php');
 
 ?>
 
-    <!-- script para add parcelas -->
-    <script>
-        function obterDataParcela(meses) {
+<!-- script para add parcelas -->
+<script>
+function obterDataParcela(meses) {
 
-            meses--;
+    meses--;
 
-            let currentDate = new Date();
+    let currentDate = new Date();
 
-            let x = currentDate.setMonth(currentDate.getMonth() + meses);
-            x = dateFormat = new Date(x);
+    let x = currentDate.setMonth(currentDate.getMonth() + meses);
+    x = dateFormat = new Date(x);
 
-            let dia = x.getDate();
-            let mes = x.getMonth() + 1;
-            mes = mes < 10 ? '0' + mes : mes;
-            let ano = x.getFullYear();
+    let dia = x.getDate();
+    let mes = x.getMonth() + 1;
+    mes = mes < 10 ? '0' + mes : mes;
+    let ano = x.getFullYear();
 
-            return `${ano}-${mes}-${dia}`;
-        }
-
-
-        function addParcelas() {
-            let valor_despesa = document.getElementById('valor-despesa').value;
-            let total_parcelas = document.getElementById('total-parcelas').value;
-
-            let valor_parcela = valor_despesa / total_parcelas;
-            valor_parcela = valor_parcela.toFixed(2)
-
-            let el_parcelas = document.getElementById('parcelas')
-            el_parcelas.innerHTML = '';
+    return `${ano}-${mes}-${dia}`;
+}
 
 
-            for (let i = 1; i <= total_parcelas; i++) {
+function addParcelas() {
+    let valor_despesa = document.getElementById('valor-despesa').value;
+    let total_parcelas = document.getElementById('total-parcelas').value;
 
-                let data_parcela= obterDataParcela(i);
+    let valor_parcela = valor_despesa / total_parcelas;
+    valor_parcela = valor_parcela.toFixed(2)
 
-                el_parcelas.innerHTML += `
+    let el_parcelas = document.getElementById('parcelas')
+    el_parcelas.innerHTML = '';
+
+
+    for (let i = 1; i <= total_parcelas; i++) {
+
+        let data_parcela = obterDataParcela(i);
+
+        el_parcelas.innerHTML += `
                     <div class="mb-3">
                         <div class="fw-bold small mb-1">${i}º Parcela</div>
                         <div class="row">
@@ -119,18 +120,16 @@ include_once "../header.php";
                         </div>
                     </div>
                 `
+    }
+}
 
-            }
-
-        }
-
-        document.getElementById('valor-despesa').onkeyup = function() {
-            addParcelas();
-        }
-        document.getElementById('total-parcelas').onkeyup = function() {
-            addParcelas();
-        }
-    </script>
+document.getElementById('valor-despesa').onkeyup = function() {
+    addParcelas();
+}
+document.getElementById('total-parcelas').onkeyup = function() {
+    addParcelas();
+}
+</script>
 
 </body>
 

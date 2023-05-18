@@ -5,7 +5,8 @@ include_once "../header.php";
 ?>
 
 
-
+<html>
+<body>
 
     <main id="main" class="main">
 
@@ -87,8 +88,8 @@ include_once "../header.php";
                 echo "<script>
 
       Swal.fire(
-        'Apagado com sucesso',
-        'Cuidado para não apagar clientes importantes',
+        'Apagado com sucesso!',
+        '',
         'success'
       )
 
@@ -115,11 +116,11 @@ include_once "../header.php";
 
 
     </main><!-- End #main -->
-    <?php 
-    $total_despesas_empresa =0;
-    include ('../footer.php');
+    <?php
+    $total_despesas_empresa = 0;
+    include('../footer.php');
 
-?>
+    ?>
 
 </body>
 

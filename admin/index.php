@@ -236,10 +236,7 @@ require_once "_autorize_admin.php";
                                             <i class="bi bi-currency-dollar"></i>
                                         </div>
                                         <?php
-
-
                                         $lucro_total = $dinheirototal_faturamento - $total_despesas_empresa;
-
                                         ?>
 
                                         <div class='ps-3'>
@@ -406,14 +403,6 @@ require_once "_autorize_admin.php";
 
                     </div>
                 </div><!-- End Left side columns -->
-
-                <!-- Right side columns -->
-
-
-
-
-                <!-- Website Traffic -->
-
 
 
                 <!-- ========== Início Demandas x Desenvolvedores ========== -->

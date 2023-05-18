@@ -4,9 +4,7 @@ require_once "_autorize_vendedor.php";
 include_once "../header.php";
 ?>
 
-
-
-    <?php
+<?php
     if (isset($_GET["jaorçado"])) {
 
         if ($_GET["jaorçado"] == 200) {
@@ -19,10 +17,13 @@ include_once "../header.php";
         if ($_GET["orcamentoenviado"] == 200) {
             echo "<script>alert('Orçamento enviado com sucesso')</script>";
         }
-
     }
     ?>
 
+
+<html>
+
+<body>
     <main id="main" class="main">
         <a href="novoprojeto.php"><button type="button" class="btn btn-primary float-end">Novo Projeto</button></a>
         <div class="pagetitle">
@@ -33,7 +34,7 @@ include_once "../header.php";
                     <li class="breadcrumb-item active">Dashboard</li>
                 </ol>
             </nav>
-        </div><!-- End Page Title -->
+        </div>
 
         <section class="section dashboard">
             <div class="row">
@@ -60,16 +61,14 @@ include_once "../header.php";
 
                                         $todos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
 
-                                        
+
                                         $count = 0;
                                         foreach ($todos as $key => $value) {
-                                       
+
                                             $count++;
                                         }
 
-                                     
-                                        
-                                        // ?>
+                                        ?>
                                         <h6><?php echo $count ?></h6>
 
                                     </div>
@@ -102,7 +101,7 @@ include_once "../header.php";
                                             $rowcount = mysqli_num_rows($resultado);
 
                                             ?>
-                                            <h6><?php echo $rowcount ?></h6>
+                                        <h6><?php echo $rowcount ?></h6>
                                         <?php }
                                         ; ?>
                                     </div>
@@ -131,7 +130,7 @@ include_once "../header.php";
                                             $rowcount = mysqli_num_rows($resultado);
 
                                             ?>
-                                            <h6><?php echo $rowcount ?></h6>
+                                        <h6><?php echo $rowcount ?></h6>
                                         <?php }
                                         ; ?>
 
@@ -176,9 +175,6 @@ include_once "../header.php";
                             </div>
                         </div><!-- End Sales Card -->
 
-
-
-
                     </div>
 
                 </div>
@@ -202,26 +198,29 @@ include_once "../header.php";
                                 <?php
                                 $sql = "SELECT * FROM projeto WHERE status = 'Aguardando' AND cliente LIKE '%$_SESSION[email]%' ORDER BY id DESC";
                                 $resultado = mysqli_query($conn, $sql);
-
                                 while ($dados = mysqli_fetch_assoc($resultado)) {
-                                    # code...
-                                
                                     ?>
-                                    <script>
-                                    function idHidden(id) {
-                                        $("#hidden").val(id);
-                                    }
-                                    </script>
-                                    <tr>
-                                        <td><?php echo $dados["nome"]; ?></td>
-                                        <td><a target="_blank" href="<?php echo $dados["briefing"]; ?>"><span
-                                                    class="material-symbols-outlined text-primary">description</a></span>
-                                        </td>
-                                    
-                                        <td><span class="badge bg-success"><?php echo $dados["status"]; ?></span></td>
-                                        <td><a href="../scripts.php?deletarprojetovendedor=<?php echo $dados["id"]; ?>" onclick="if(!confirm('Deseja realmente remover este projeto?')) event.preventDefault()"><span
-                                                class="material-symbols-outlined text-danger">delete</span></a></td>
-                                    </tr>
+                                <script>
+                                function idHidden(id) {
+                                    $("#hidden").val(id);
+                                }
+                                </script>
+                                <tr>
+                                    <td>
+                                        <?php echo $dados["nome"]; ?>
+                                    </td>
+                                    <td><a target="_blank" href="<?php echo $dados["briefing"]; ?>">
+                                            <span class="material-symbols-outlined text-primary">description</a></span>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-success"><?php echo $dados["status"]; ?></span>
+                                    </td>
+                                    <td>
+                                        <a href="../scripts.php?deletarprojetovendedor=<?php echo $dados["id"]; ?>"
+                                            onclick="if(!confirm('Deseja realmente remover este projeto?')) event.preventDefault()"><span
+                                                class="material-symbols-outlined text-danger">delete</span></a>
+                                    </td>
+                                </tr>
                                 <?php }
                                 ; ?>
                             </tbody>
@@ -231,19 +230,9 @@ include_once "../header.php";
 
                 </div>
             </div><!-- End Recent Sales -->
-
-            </div>
-            </div><!-- End Left side columns -->
-
-            </div>
-            </div><!-- End News & Updates -->
-
-            </div><!-- End Right side columns -->
-
-            </div>
         </section>
-
     </main><!-- End #main -->
+
     <!-- Modal orçamento !-->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -289,46 +278,42 @@ include_once "../header.php";
                     <button type="submit" class="btn btn-success" name="enviarvalor">Enviar</button>
                 </div>
             </div>
-            </form>
         </div>
 
     </div>
-   
+
 
     <?php
     if (isset($_POST["enviar"])) {
         ?>
-        <script>
-        Swal.fire(
-            'Orçamento enviado com sucesso!',
-            'Aguarde a resposta do cliente.',
-            'success'
-        )
-        </script>
+    <script>
+    Swal.fire(
+        'Orçamento enviado com sucesso!',
+        'Aguarde a resposta do cliente.',
+        'success'
+    )
+    </script>
     <?php } ?>
 
 
     <?php
     if (isset($_POST["apagar"])) {
         ?>
-        <script>
-        Swal.fire(
-            'Apagado com sucesso!',
-            '',
-            'success'
-        )
-        </script>
+    <script>
+    Swal.fire(
+        'Apagado com sucesso!',
+        '',
+        'success'
+    )
+    </script>
     <?php } ?>
 
 
-    <?php 
-    $total_despesas_empresa =0;
-    include ('../footer.php');
+    <?php
+    $total_despesas_empresa = 0;
+    include('../footer.php');
 
-?>
+    ?>
 </body>
 
 </html>
-
-
-

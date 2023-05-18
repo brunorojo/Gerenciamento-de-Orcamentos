@@ -5,7 +5,7 @@ include_once "../header.php";
 ?>
 
 
-    <?php 
+<?php 
     if (isset($_GET["jaorçado"])) {
 
         if ($_GET["jaorçado"] == 200) {
@@ -21,22 +21,22 @@ include_once "../header.php";
         
     }
 ?>
-    <main id="main" class="main">
+<main id="main" class="main">
 
-        <div class="pagetitle">
-            <h1>Projetos Orçados</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                    <li class="breadcrumb-item active">Projetos Orçados</li>
-                </ol>
-            </nav>
-        </div><!-- End Page Title -->
+    <div class="pagetitle">
+        <h1>Projetos Orçados</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                <li class="breadcrumb-item active">Projetos Orçados</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
 
-        <section class="section dashboard">
-            <div class="row">
+    <section class="section dashboard">
+        <div class="row">
 
-               
+
 
             <!-- Recent Sales -->
             <div class="col-12">
@@ -75,7 +75,7 @@ include_once "../header.php";
                                     <td><a href="<?php echo $dados["briefing"]; ?>" target="_blank"><span
                                                 class="material-symbols-outlined text-primary">description</a></span>
                                     </td>
-                                   
+
                                     <td><?php echo $dados["desenvolvedor"]; ?></td>
                                     <td>R$ <?= number_format($dados["valorcliente"], 2, ',','.' ) ?></td>
                                     <td>
@@ -84,14 +84,17 @@ include_once "../header.php";
                                     <td><span class="badge bg-success"><?php echo $dados["status"]; ?></span></td>
                                     <td>
 
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#modalId" onclick="setUrlAprovar('../scripts.php?aprovarprojeto=<?= $dados['id'] ?>')" title="Aprovar">
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#modalId"
+                                            onclick="setUrlAprovar('../scripts.php?aprovarprojeto=<?= $dados['id'] ?>')"
+                                            title="Aprovar">
                                             <span class="material-symbols-outlined text-success">done_all</span>
                                         </a>
 
                                     </td>
-                                    <td><a href="../scripts.php?deletarprojetoorcado=<?php echo $dados["id"]; ?>" onclick="if(!confirm('Deseja realmente remover este projeto?')) event.preventDefault()"><span
-                                            class="material-symbols-outlined text-danger">delete</span></a></td>
-                                    
+                                    <td><a href="../scripts.php?deletarprojetoorcado=<?php echo $dados["id"]; ?>"
+                                            onclick="if(!confirm('Deseja realmente remover este projeto?')) event.preventDefault()"><span
+                                                class="material-symbols-outlined text-danger">delete</span></a></td>
+
 
                                 </tr>
                                 <?php }; ?>
@@ -105,150 +108,147 @@ include_once "../header.php";
 
 
 
-            </div>
-            </div><!-- End Left side columns -->
-            </div>
-            </div><!-- End News & Updates -->
-
-            </div><!-- End Right side columns -->
-
-            </div>
-        </section>
-
-    </main><!-- End #main -->
-    <!-- Modal orçamento !-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Enviar orçamento</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="../scripts.php" method="POST">
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Quantas horas você acredita que
-                                gastará?</label>
-                            <input type="number" name="horas" required="" id="um" class="form-control"
-                                id="recipient-name">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Você receberá:</label>
-                            <input type="number" readonly="on" id="dois" class="form-control" id="recipient-name">
-                        </div>
-                        <input type="hidden" name="id" id="hidden" value="">
-                        <script>
-                        function trim(str) {
-                            return str.replace(/[^a-zA-Z0-9]/g, '')
-                        }
-
-                        let input = document.getElementById('um')
-                        let input2 = document.getElementById('dois')
-
-
-                        input.onkeyup = function() {
-                            if (input.value < 20) {
-                                input2.value = trim(input.value) * 25
-                                exit();
-                            } else {
-                                input2.value = trim(input.value) * 17
-                            }
-                        }
-                        </script>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success" name="enviarvalor">Enviar</button>
-                </div>
-            </div>
-            </form>
         </div>
+        </div><!-- End Left side columns -->
+        </div>
+        </div><!-- End News & Updates -->
 
+        </div><!-- End Right side columns -->
+
+        </div>
+    </section>
+
+</main><!-- End #main -->
+<!-- Modal orçamento !-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Enviar orçamento</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="../scripts.php" method="POST">
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Quantas horas você acredita que
+                            gastará?</label>
+                        <input type="number" name="horas" required="" id="um" class="form-control" id="recipient-name">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Você receberá:</label>
+                        <input type="number" readonly="on" id="dois" class="form-control" id="recipient-name">
+                    </div>
+                    <input type="hidden" name="id" id="hidden" value="">
+                    <script>
+                    function trim(str) {
+                        return str.replace(/[^a-zA-Z0-9]/g, '')
+                    }
+
+                    let input = document.getElementById('um')
+                    let input2 = document.getElementById('dois')
+
+
+                    input.onkeyup = function() {
+                        if (input.value < 20) {
+                            input2.value = trim(input.value) * 25
+                            exit();
+                        } else {
+                            input2.value = trim(input.value) * 17
+                        }
+                    }
+                    </script>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" name="enviarvalor">Enviar</button>
+            </div>
+        </div>
+        </form>
     </div>
-    
 
-    <?php 
+</div>
+
+
+<?php 
     if (isset($_POST["enviar"])) {
         
 ?>
 
-    <script>
-    Swal.fire(
-        'Orçamento enviado com sucesso!',
-        'Aguarde a resposta do cliente.',
-        'success'
-    )
-    </script>
+<script>
+Swal.fire(
+    'Orçamento enviado com sucesso!',
+    'Aguarde a resposta do cliente.',
+    'success'
+)
+</script>
 
-    <?php } ?>
+<?php } ?>
 
 
-    <?php 
+<?php 
     if (isset($_POST["apagar"])) {
         
 ?>
 
-    <script>
-    Swal.fire(
-        'Apagado com sucesso!',
-        '',
-        'success'
-    )
-    </script>
+<script>
+Swal.fire(
+    'Apagado com sucesso!',
+    '',
+    'success'
+)
+</script>
 
-    <?php } ?>
+<?php } ?>
 
 
-    <!-- Modal Confirmar aprovação -->
-    <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title fw-bold" id="modalTitleId">Aprovar Projeto</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<!-- Modal Confirmar aprovação -->
+<div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+    aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="modalTitleId">Aprovar Projeto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="numero-parcelas" class="form-label">Número de parcelar</label>
+                    <input type="number" class="form-control" value="1" min="1" id="numero-parcelas" require>
                 </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="numero-parcelas" class="form-label">Número de parcelar</label>
-                        <input type="number" class="form-control" value="1" min="1" id="numero-parcelas" require>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" onclick="aprovarProjeto()">Aprovar</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="aprovarProjeto()">Aprovar</button>
             </div>
         </div>
     </div>
+</div>
 
 
-    <?php 
+<?php 
     $total_despesas_empresa =0;
     include ('../footer.php');
 
 ?>
 
-    <script>
-        /* add url para aprovar orçamento */
-        var url_aprovar_projeto = null;
+<script>
+/* add url para aprovar orçamento */
+var url_aprovar_projeto = null;
 
-        function setUrlAprovar(url) {
-            url_aprovar_projeto = url;
-        }
+function setUrlAprovar(url) {
+    url_aprovar_projeto = url;
+}
 
-        function aprovarProjeto() {
-            let total_parcelas = document.querySelector('#numero-parcelas').value
-            if (total_parcelas == '' || total_parcelas == 0) {
-                alert('Informe o total de parcelas do pagamento do projeto');
-            } else {
-                window.location.href = url_aprovar_projeto + '&total_parcelas=' + total_parcelas;
-            }
-        }
-    </script>
+function aprovarProjeto() {
+    let total_parcelas = document.querySelector('#numero-parcelas').value
+    if (total_parcelas == '' || total_parcelas == 0) {
+        alert('Informe o total de parcelas do pagamento do projeto');
+    } else {
+        window.location.href = url_aprovar_projeto + '&total_parcelas=' + total_parcelas;
+    }
+}
+</script>
 
 </body>
 
 </html>
-
-
-

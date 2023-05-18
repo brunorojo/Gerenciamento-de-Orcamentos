@@ -68,12 +68,7 @@ include_once("../header.php");
 
     </main><!-- End #main -->
 
-    <?php 
+<?php 
     $total_despesas_empresa =0;
     include ('../footer.php');
-
 ?>
-
-</body>
-
-</html>

@@ -27,7 +27,7 @@
                 <span>Projetos orçados</span>
             </a>
         </li>
-         <li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link collapsed gap-2 lh-sm" href="clientes.php">
                 <span class="material-symbols-outlined">sentiment_very_satisfied</span>
                 <span>Clientes</span>
