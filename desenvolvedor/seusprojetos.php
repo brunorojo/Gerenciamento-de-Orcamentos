@@ -53,7 +53,7 @@ if (isset($_GET["orcamentoenviado"])) {
                             </thead>
                             <tbody>
                                 <?php
-                              
+
                                 $sql = "SELECT *, projeto.id as id FROM orcamentos LEFT JOIN projeto ON orcamentos.projeto_id = projeto.id 
                                         WHERE orcamentos.dev_id = " . $_SESSION['id'] . " ORDER BY orcamentos.id DESC ";
                                 $resultado = mysqli_query($conn, $sql);
@@ -62,30 +62,23 @@ if (isset($_GET["orcamentoenviado"])) {
                                     # code...
 
                                 ?>
-                                <script>
-                                function idHidden(id) {
-                                    $("#hidden").val(id);
-                                }
-                                </script>
-                                <tr>
-                                    <td><?php echo $dados["nome"]; ?></td>
-                                    <td><a href="<?php echo $dados["briefing"]; ?>" target="_blank"><span
-                                                class="material-symbols-outlined text-primary">description</a></span>
-                                    </td>
+                                    <script>
+                                        function idHidden(id) {
+                                            $("#hidden").val(id);
+                                        }
+                                    </script>
+                                    <tr>
+                                        <td><?php echo $dados["nome"]; ?></td>
+                                        <td><a href="<?php echo $dados["briefing"]; ?>"><span class="material-symbols-outlined text-primary">description</a></span>
+                                        </td>
 
-                                    <td><a href="../scripts.php?iniciarprojeto=<?php echo $dados["id"]; ?>"
-                                            onclick="if(!confirm('Você quer iniciar este projeto agora?')) event.preventDefault()"><span
-                                                class="material-symbols-outlined text-success">slow_motion_video</span></a>
-                                    </td>
-                                    <td><a href="../scripts.php?finalizarprojeto=<?php echo $dados["id"]; ?>"
-                                            onclick="if(!confirm('Certeza que o projeto está finalizado?')) event.preventDefault()"><span
-                                                class="material-symbols-outlined text-primary">playlist_add_check_circle</span></a>
-                                    </td>
-                                    <td><span
-                                            class="badge bg-success"><?php echo $dados["status"] == 'orçado' ? 'Aguardando' : $dados["status"]; ?></span>
-                                    </td>
+                                        <td><a href="../scripts.php?iniciarprojeto=<?php echo $dados["id"]; ?>" onclick="if(!confirm('Você quer iniciar este projeto agora?')) event.preventDefault()"><span class="material-symbols-outlined text-success">slow_motion_video</span></a>
+                                        </td>
+                                        <td><a href="../scripts.php?finalizarprojeto=<?php echo $dados["id"]; ?>" onclick="if(!confirm('Certeza que o projeto está finalizado?')) event.preventDefault()"><span class="material-symbols-outlined text-primary">playlist_add_check_circle</span></a>
+                                        </td>
+                                        <td><span class="badge bg-success"><?php echo $dados["status"] == 'orçado' ? 'Aguardando' : $dados["status"]; ?></span></td>
 
-                                </tr>
+                                    </tr>
                                 <?php }; ?>
                             </tbody>
                         </table>
@@ -98,15 +91,11 @@ if (isset($_GET["orcamentoenviado"])) {
 
 
         </div>
-        </div><!-- End Left side columns -->
+       
 
 
-        </div>
-        </div><!-- End News & Updates -->
 
-        </div><!-- End Right side columns -->
-
-        </div>
+      
     </section>
 
 </main><!-- End #main -->
@@ -132,22 +121,22 @@ if (isset($_GET["orcamentoenviado"])) {
                     </div>
                     <input type="hidden" name="id" id="hidden" value="">
                     <script>
-                    function trim(str) {
-                        return str.replace(/[^a-zA-Z0-9]/g, '')
-                    }
-
-                    let input = document.getElementById('um')
-                    let input2 = document.getElementById('dois')
-
-
-                    input.onkeyup = function() {
-                        if (input.value < 20) {
-                            input2.value = trim(input.value) * 25
-                            exit();
-                        } else {
-                            input2.value = trim(input.value) * 17
+                        function trim(str) {
+                            return str.replace(/[^a-zA-Z0-9]/g, '')
                         }
-                    }
+
+                        let input = document.getElementById('um')
+                        let input2 = document.getElementById('dois')
+
+
+                        input.onkeyup = function() {
+                            if (input.value < 20) {
+                                input2.value = trim(input.value) * 25
+                                exit();
+                            } else {
+                                input2.value = trim(input.value) * 17
+                            }
+                        }
                     </script>
             </div>
             <div class="modal-footer">
@@ -165,13 +154,13 @@ if (isset($_POST["enviar"])) {
 
 ?>
 
-<script>
-Swal.fire(
-    'Orçamento enviado com sucesso!',
-    'Vamos aguardar a resposta do cliente',
-    'success'
-)
-</script>
+    <script>
+        Swal.fire(
+            'Orçamento enviado com sucesso!',
+            'Vamos aguardar a resposta do cliente',
+            'success'
+        )
+    </script>
 
 <?php } ?>
 
@@ -181,31 +170,31 @@ if (isset($_POST["apagar"])) {
 
 ?>
 
-<script>
-Swal.fire(
-    'Apagado com sucesso!',
-    'Você apagou um projeto.',
-    'success'
-)
-</script>
+    <script>
+        Swal.fire(
+            'Apagado com sucesso!',
+            'Você apagou um projeto.',
+            'success'
+        )
+    </script>
 
 <?php } ?>
 
 <?php
-                if (isset($_GET["resultado"])) {
-                    $resultado = $_GET["resultado"];
+if (isset($_GET["resultado"])) {
+    $resultado = $_GET["resultado"];
 
-                    if ($resultado == 550) {
-                        echo "<script>
+    if ($resultado == 550) {
+        echo "<script>
                             Swal.fire(
                             'Aviso',
                             'Esse projeto ainda não foi aprovado!',
                             'error'
                             )
                             </script>";
-                    }
-                }
-                ?>
+    }
+}
+?>
 
 
 <?php

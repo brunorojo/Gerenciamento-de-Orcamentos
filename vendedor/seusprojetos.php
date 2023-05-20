@@ -1,25 +1,23 @@
-<?php 
+<?php
 session_start();
 require_once "_autorize_vendedor.php";
 include_once "../header.php";
 ?>
 
 
-<?php 
-    if (isset($_GET["jaorçado"])) {
+<?php
+if (isset($_GET["jaorçado"])) {
 
-        if ($_GET["jaorçado"] == 200) {
-           echo "<script>alert('projeto já orçado por outro desenvolvedor, não roube a vez do coleguinha.')</script>";
-        }
-        
+    if ($_GET["jaorçado"] == 200) {
+        echo "<script>alert('projeto já orçado por outro desenvolvedor, não roube a vez do coleguinha.')</script>";
     }
-    if (isset($_GET["orcamentoenviado"])) {
+}
+if (isset($_GET["orcamentoenviado"])) {
 
-        if ($_GET["orcamentoenviado"] == 200) {
-           echo "<script>alert('Orçamento enviado com sucesso')</script>";
-        }
-        
+    if ($_GET["orcamentoenviado"] == 200) {
+        echo "<script>alert('Orçamento enviado com sucesso')</script>";
     }
+}
 ?>
 <main id="main" class="main">
 
@@ -57,46 +55,41 @@ include_once "../header.php";
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
-                                    $sql = "SELECT * FROM projeto WHERE status = 'orçado' AND cliente LIKE '%$_SESSION[email]%' ORDER BY id DESC";
-                                    $resultado = mysqli_query($conn, $sql);
+                                <?php
+                                $sql = "SELECT * FROM projeto WHERE status = 'orçado' AND cliente LIKE '%$_SESSION[email]%' ORDER BY id DESC";
+                                $resultado = mysqli_query($conn, $sql);
 
-                                    while ($dados = mysqli_fetch_assoc($resultado)) {
-                                        # code...
-                                    
+                                while ($dados = mysqli_fetch_assoc($resultado)) {
+                                    # code...
+
                                 ?>
-                                <script>
-                                function idHidden(id) {
-                                    $("#hidden").val(id);
-                                }
-                                </script>
-                                <tr>
-                                    <td><?php echo $dados["nome"]; ?></td>
-                                    <td><a href="<?php echo $dados["briefing"]; ?>" target="_blank"><span
-                                                class="material-symbols-outlined text-primary">description</a></span>
-                                    </td>
+                                    <script>
+                                        function idHidden(id) {
+                                            $("#hidden").val(id);
+                                        }
+                                    </script>
+                                    <tr>
+                                        <td><?php echo $dados["nome"]; ?></td>
+                                        <td><a href="<?php echo $dados["briefing"]; ?>" target="_blank"><span class="material-symbols-outlined text-primary">description</a></span>
+                                        </td>
 
-                                    <td><?php echo $dados["desenvolvedor"]; ?></td>
-                                    <td>R$ <?= number_format($dados["valorcliente"], 2, ',','.' ) ?></td>
-                                    <td>
-                                        <?= $dados["dataentrega"] ? $dados["dataentrega"] . ' dias' : $dados["dataentrega"] ?>
-                                    </td>
-                                    <td><span class="badge bg-success"><?php echo $dados["status"]; ?></span></td>
-                                    <td>
+                                        <td><?php echo $dados["desenvolvedor"]; ?></td>
+                                        <td>R$ <?= number_format($dados["valorcliente"], 2, ',', '.') ?></td>
+                                        <td>
+                                            <?= $dados["dataentrega"] ? $dados["dataentrega"] . ' dias' : $dados["dataentrega"] ?>
+                                        </td>
+                                        <td><span class="badge bg-success"><?php echo $dados["status"]; ?></span></td>
+                                        <td>
 
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#modalId"
-                                            onclick="setUrlAprovar('../scripts.php?aprovarprojeto=<?= $dados['id'] ?>')"
-                                            title="Aprovar">
-                                            <span class="material-symbols-outlined text-success">done_all</span>
-                                        </a>
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalId" onclick="setUrlAprovar('../scripts.php?aprovarprojeto=<?= $dados['id'] ?>')" title="Aprovar">
+                                                <span class="material-symbols-outlined text-success">done_all</span>
+                                            </a>
 
-                                    </td>
-                                    <td><a href="../scripts.php?deletarprojetoorcado=<?php echo $dados["id"]; ?>"
-                                            onclick="if(!confirm('Deseja realmente remover este projeto?')) event.preventDefault()"><span
-                                                class="material-symbols-outlined text-danger">delete</span></a></td>
+                                        </td>
+                                        <td><a href="../scripts.php?deletarprojetoorcado=<?php echo $dados["id"]; ?>" onclick="if(!confirm('Deseja realmente remover este projeto?')) event.preventDefault()"><span class="material-symbols-outlined text-danger">delete</span></a></td>
 
 
-                                </tr>
+                                    </tr>
                                 <?php }; ?>
                             </tbody>
                         </table>
@@ -106,16 +99,9 @@ include_once "../header.php";
                 </div>
             </div><!-- End Recent Sales -->
 
-
-
         </div>
-        </div><!-- End Left side columns -->
-        </div>
-        </div><!-- End News & Updates -->
 
-        </div><!-- End Right side columns -->
-
-        </div>
+      
     </section>
 
 </main><!-- End #main -->
@@ -141,22 +127,22 @@ include_once "../header.php";
                     </div>
                     <input type="hidden" name="id" id="hidden" value="">
                     <script>
-                    function trim(str) {
-                        return str.replace(/[^a-zA-Z0-9]/g, '')
-                    }
-
-                    let input = document.getElementById('um')
-                    let input2 = document.getElementById('dois')
-
-
-                    input.onkeyup = function() {
-                        if (input.value < 20) {
-                            input2.value = trim(input.value) * 25
-                            exit();
-                        } else {
-                            input2.value = trim(input.value) * 17
+                        function trim(str) {
+                            return str.replace(/[^a-zA-Z0-9]/g, '')
                         }
-                    }
+
+                        let input = document.getElementById('um')
+                        let input2 = document.getElementById('dois')
+
+
+                        input.onkeyup = function() {
+                            if (input.value < 20) {
+                                input2.value = trim(input.value) * 25
+                                exit();
+                            } else {
+                                input2.value = trim(input.value) * 17
+                            }
+                        }
                     </script>
             </div>
             <div class="modal-footer">
@@ -169,41 +155,40 @@ include_once "../header.php";
 </div>
 
 
-<?php 
-    if (isset($_POST["enviar"])) {
-        
+<?php
+if (isset($_POST["enviar"])) {
+
 ?>
 
-<script>
-Swal.fire(
-    'Orçamento enviado com sucesso!',
-    'Aguarde a resposta do cliente.',
-    'success'
-)
-</script>
+    <script>
+        Swal.fire(
+            'Orçamento enviado com sucesso!',
+            'Aguarde a resposta do cliente.',
+            'success'
+        )
+    </script>
 
 <?php } ?>
 
 
-<?php 
-    if (isset($_POST["apagar"])) {
-        
+<?php
+if (isset($_POST["apagar"])) {
+
 ?>
 
-<script>
-Swal.fire(
-    'Apagado com sucesso!',
-    '',
-    'success'
-)
-</script>
+    <script>
+        Swal.fire(
+            'Apagado com sucesso!',
+            '',
+            'success'
+        )
+    </script>
 
 <?php } ?>
 
 
 <!-- Modal Confirmar aprovação -->
-<div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
-    aria-labelledby="modalTitleId" aria-hidden="true">
+<div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -225,28 +210,28 @@ Swal.fire(
 </div>
 
 
-<?php 
-    $total_despesas_empresa =0;
-    include ('../footer.php');
+<?php
+$total_despesas_empresa = 0;
+include('../footer.php');
 
 ?>
 
 <script>
-/* add url para aprovar orçamento */
-var url_aprovar_projeto = null;
+    /* add url para aprovar orçamento */
+    var url_aprovar_projeto = null;
 
-function setUrlAprovar(url) {
-    url_aprovar_projeto = url;
-}
-
-function aprovarProjeto() {
-    let total_parcelas = document.querySelector('#numero-parcelas').value
-    if (total_parcelas == '' || total_parcelas == 0) {
-        alert('Informe o total de parcelas do pagamento do projeto');
-    } else {
-        window.location.href = url_aprovar_projeto + '&total_parcelas=' + total_parcelas;
+    function setUrlAprovar(url) {
+        url_aprovar_projeto = url;
     }
-}
+
+    function aprovarProjeto() {
+        let total_parcelas = document.querySelector('#numero-parcelas').value
+        if (total_parcelas == '' || total_parcelas == 0) {
+            alert('Informe o total de parcelas do pagamento do projeto');
+        } else {
+            window.location.href = url_aprovar_projeto + '&total_parcelas=' + total_parcelas;
+        }
+    }
 </script>
 
 </body>

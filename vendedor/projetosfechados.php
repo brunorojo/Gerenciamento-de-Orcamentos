@@ -6,21 +6,19 @@ include_once "../header.php";
 
 
 <?php
-    if (isset($_GET["jaorçado"])) {
+if (isset($_GET["jaorçado"])) {
 
-        if ($_GET["jaorçado"] == 200) {
-            echo "<script>alert('projeto já orçado por outro desenvolvedor, não roube a vez do coleguinha.')</script>";
-        }
-
+    if ($_GET["jaorçado"] == 200) {
+        echo "<script>alert('projeto já orçado por outro desenvolvedor, não roube a vez do coleguinha.')</script>";
     }
-    if (isset($_GET["orcamentoenviado"])) {
+}
+if (isset($_GET["orcamentoenviado"])) {
 
-        if ($_GET["orcamentoenviado"] == 200) {
-            echo "<script>alert('Orçamento enviado com sucesso')</script>";
-        }
-
+    if ($_GET["orcamentoenviado"] == 200) {
+        echo "<script>alert('Orçamento enviado com sucesso')</script>";
     }
-    ?>
+}
+?>
 
 <main id="main" class="main">
 
@@ -56,40 +54,38 @@ include_once "../header.php";
                             </thead>
                             <tbody>
                                 <?php
-                                    $sql = "SELECT * FROM projeto WHERE status != 'orçado' AND status != 'aguardando' AND cliente LIKE '%$_SESSION[email]%' ORDER BY id DESC";
-                                    $resultado = mysqli_query($conn, $sql);
+                                $sql = "SELECT * FROM projeto WHERE status != 'orçado' AND status != 'aguardando' AND cliente LIKE '%$_SESSION[email]%' ORDER BY id DESC";
+                                $resultado = mysqli_query($conn, $sql);
 
-                                    while ($dados = mysqli_fetch_assoc($resultado)) {
-                                        # code...
-                                    
-                                        ?>
-                                <script>
-                                function idHidden(id) {
-                                    $("#hidden").val(id);
-                                }
-                                </script>
-                                <tr>
-                                    <td><?php echo $dados["nome"]; ?></td>
-                                    <td><a href="<?php echo $dados["briefing"]; ?>" target="_blank"><span
-                                                class="material-symbols-outlined text-primary">description</a></span>
-                                    </td>
+                                while ($dados = mysqli_fetch_assoc($resultado)) {
+                                    # code...
+
+                                ?>
+                                    <script>
+                                        function idHidden(id) {
+                                            $("#hidden").val(id);
+                                        }
+                                    </script>
+                                    <tr>
+                                        <td><?php echo $dados["nome"]; ?></td>
+                                        <td><a href="<?php echo $dados["briefing"]; ?>" target="_blank"><span class="material-symbols-outlined text-primary">description</a></span>
+                                        </td>
 
 
-                                    <td>
-                                        <?php echo $dados["desenvolvedor"]; ?>
-                                    </td>
-                                    <td>
-                                        <?php if ($dados["dataentrega"] && $dados["status"] == 'aprovado' || $dados["status"] == 'iniciado' || $dados["status"] == 'finalizado'): ?>
+                                        <td>
+                                            <?php echo $dados["desenvolvedor"]; ?>
+                                        </td>
+                                        <td>
+                                            <?php if ($dados["dataentrega"] && $dados["status"] == 'aprovado' || $dados["status"] == 'iniciado' || $dados["status"] == 'finalizado') : ?>
 
-                                        <?= date('d/m/Y', strtotime($dados["data_inicio"] . " + " . ceil($dados["dataentrega"]) . " days")) ?>
+                                                <?= date('d/m/Y', strtotime($dados["data_inicio"] . " + " . ceil($dados["dataentrega"]) . " days")) ?>
 
-                                        <?php endif; ?>
-                                    </td>
-                                    <td><span class="badge bg-success"><?php echo $dados["status"]; ?></span></td>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td><span class="badge bg-success"><?php echo $dados["status"]; ?></span></td>
 
-                                </tr>
-                                <?php }
-                                    ; ?>
+                                    </tr>
+                                <?php }; ?>
                             </tbody>
                         </table>
 
@@ -97,16 +93,8 @@ include_once "../header.php";
 
                 </div>
             </div><!-- End Recent Sales -->
-
         </div>
-        </div><!-- End Left side columns -->
-
-        </div>
-        </div><!-- End News & Updates -->
-
-        </div><!-- End Right side columns -->
-
-        </div>
+       
     </section>
 
 </main><!-- End #main -->
@@ -132,22 +120,22 @@ include_once "../header.php";
                     </div>
                     <input type="hidden" name="id" id="hidden" value="">
                     <script>
-                    function trim(str) {
-                        return str.replace(/[^a-zA-Z0-9]/g, '')
-                    }
-
-                    let input = document.getElementById('um')
-                    let input2 = document.getElementById('dois')
-
-
-                    input.onkeyup = function() {
-                        if (input.value < 20) {
-                            input2.value = trim(input.value) * 25
-                            exit();
-                        } else {
-                            input2.value = trim(input.value) * 17
+                        function trim(str) {
+                            return str.replace(/[^a-zA-Z0-9]/g, '')
                         }
-                    }
+
+                        let input = document.getElementById('um')
+                        let input2 = document.getElementById('dois')
+
+
+                        input.onkeyup = function() {
+                            if (input.value < 20) {
+                                input2.value = trim(input.value) * 25
+                                exit();
+                            } else {
+                                input2.value = trim(input.value) * 17
+                            }
+                        }
                     </script>
             </div>
             <div class="modal-footer">
@@ -161,49 +149,49 @@ include_once "../header.php";
 
 
 <?php
-    if (isset($_POST["enviar"])) {
-        ?>
-<script>
-Swal.fire(
-    'Orçamento enviado com sucesso!',
-    'Aguarde a resposta do cliente.',
-    'success'
-)
-</script>
+if (isset($_POST["enviar"])) {
+?>
+    <script>
+        Swal.fire(
+            'Orçamento enviado com sucesso!',
+            'Aguarde a resposta do cliente.',
+            'success'
+        )
+    </script>
 <?php } ?>
 
 
 <?php
-    if (isset($_POST["apagar"])) {
-        ?>
-<script>
-Swal.fire(
-    'Apagado com sucesso!',
-    '',
-    'success'
-)
-</script>
+if (isset($_POST["apagar"])) {
+?>
+    <script>
+        Swal.fire(
+            'Apagado com sucesso!',
+            '',
+            'success'
+        )
+    </script>
 <?php } ?>
 
 <?php
-                if (isset($_GET["aprovado"])) {
-                    $resultado = $_GET["aprovado"];
+if (isset($_GET["aprovado"])) {
+    $resultado = $_GET["aprovado"];
 
-                    if ($resultado == 200) {
-                        echo "<script>
+    if ($resultado == 200) {
+        echo "<script>
                             Swal.fire(
                             'Aprovado',
                             'Projeto aprovado com sucesso!',
                             'success'
                             )
                             </script>";
-                    }
-                }
-                ?>
+    }
+}
+?>
 
-<?php 
-    $total_despesas_empresa =0;
-    include ('../footer.php');
+<?php
+$total_despesas_empresa = 0;
+include('../footer.php');
 
 ?>
 

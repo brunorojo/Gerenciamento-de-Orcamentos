@@ -29,7 +29,7 @@ include_once "../header.php";
 
 
                 <div class="card-body">
-                    <h5 class="card-title">Administradores</h5>
+                    <h5 class="card-title">Admnistradores</h5>
 
                     <table class="table table-borderless">
                         <thead>
@@ -45,24 +45,20 @@ include_once "../header.php";
                         <tbody>
                             <?php
 
-                                $sql = "SELECT * FROM login WHERE nivel = 'admin'";
-                                $resultado = mysqli_query($conn, $sql);
+                            $sql = "SELECT * FROM login WHERE nivel = 'admin'";
+                            $resultado = mysqli_query($conn, $sql);
 
-                                while ($dados = mysqli_fetch_assoc($resultado)) {
+                            while ($dados = mysqli_fetch_assoc($resultado)) {
 
-                                    ?>
-                            <tr>
-                                <td><?php echo $dados["nome"]; ?></td>
-                                <td><?php echo $dados["whatsapp"]; ?></td>
-                                <td><?php echo $dados["email"]; ?></td>
-                                <td><a href="editaradmin.php?id=<?php echo $dados["id"]; ?>"><span
-                                            class="material-symbols-outlined text-warning">edit</span></a></td>
-                                <td><a href="../scripts.php?deletaradmin=<?php echo $dados["id"]; ?>"
-                                        onclick="if(!confirm('Deseja remover este admin?')) event.preventDefault()"><span
-                                            class="material-symbols-outlined text-danger">delete</span></a></td>
-                            </tr>
-                            <?php }
-                                ; ?>
+                            ?>
+                                <tr>
+                                    <td><?php echo $dados["nome"]; ?></td>
+                                    <td><?php echo $dados["whatsapp"]; ?></td>
+                                    <td><?php echo $dados["email"]; ?></td>
+                                    <td><a href="editaradmin.php?id=<?php echo $dados["id"]; ?>"><span class="material-symbols-outlined text-warning">edit</span></a></td>
+                                    <td><a href="../scripts.php?deletaradmin=<?php echo $dados["id"]; ?>" onclick="if(!confirm('Deseja remover este admin?')) event.preventDefault()"><span class="material-symbols-outlined text-danger">delete</span></a></td>
+                                </tr>
+                            <?php }; ?>
                         </tbody>
                     </table>
 
@@ -71,27 +67,14 @@ include_once "../header.php";
             </div>
         </div><!-- End Recent Sales -->
 
-
-
-        </div>
-        </div><!-- End Left side columns -->
-
-
-
-        </div>
-        </div><!-- End News & Updates -->
-
-        </div><!-- End Right side columns -->
-
-        </div>
     </section>
 
 </main><!-- End #main -->
 
 
 <?php
-$total_despesas_empresa =0;
-include ('../footer.php');
+$total_despesas_empresa = 0;
+include('../footer.php');
 if (isset($_GET["editaradmin"])) {
     $editaradmin = $_GET["editaradmin"];
     if ($editaradmin == 200) {

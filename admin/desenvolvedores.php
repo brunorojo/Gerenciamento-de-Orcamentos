@@ -44,55 +44,54 @@ include_once "../header.php";
                     </thead>
                     <tbody>
                         <?php
-                            $sql = "SELECT * FROM login";
-                            $resultado = mysqli_query($conn, $sql);
+                        $sql = "SELECT * FROM login";
+                        $resultado = mysqli_query($conn, $sql);
 
-                            while ($dados = mysqli_fetch_assoc($resultado)) {
+                        while ($dados = mysqli_fetch_assoc($resultado)) {
+
+                        ?>
+                            <tr>
+                                <td>
+                                    <?php echo $dados["nome"]; ?>
+                                </td>
+                                <td>
+                                    <?php echo $dados["whatsapp"]; ?>
+                                </td>
+                                <td>
+                                    <?php echo $dados["email"]; ?>
+                                </td>
+                                <td>
+                                    <?php echo $dados["senha"]; ?>
+                                </td>
+                                <td>
+                                    <?php echo $dados["nivel"]; ?>
+                                </td>
+
+                                <?php
+
+                                switch ($dados['status']) {
+
+                                    case (0):
+                                        echo "<td>Ativo</td>";
+                                        break;
+
+                                    case (1):
+                                        echo "<td>Bloqueado</td>";
+                                        break;
+                                }
 
                                 ?>
-                        <tr>
-                            <td>
-                                <?php echo $dados["nome"]; ?>
-                            </td>
-                            <td>
-                                <?php echo $dados["whatsapp"]; ?>
-                            </td>
-                            <td>
-                                <?php echo $dados["email"]; ?>
-                            </td>
-                            <td>
-                                <?php echo $dados["senha"]; ?>
-                            </td>
-                            <td>
-                                <?php echo $dados["nivel"]; ?>
-                            </td>
-
-                            <?php      
-                                        switch($dados['status']){
-
-                                            case(0):
-                                                echo "<td>Ativo</td>";
-                                                break;
-
-                                            case(1):
-                                                echo "<td>Bloqueado</td>";
-                                                break;
-                                        }
-                                    
-                                    ?>
-                            <td>
-                                <a href="../scripts.php?bloqueardev=<?php echo $dados["id"]; ?>"
-                                    onclick="if(!confirm('Deseja bloquear este usuário?')) event.preventDefault()">
-                                    <span class="material-symbols-outlined text-danger">cancel</span>
-                                </a>
-                            </td>
-                            <td>
-                                <a href="../scripts.php?aprovardev=<?php echo $dados["id"]; ?>"
-                                    onclick="if(!confirm('Deseja aprovar este usuário?')) event.preventDefault()">
-                                    <span class="material-symbols-outlined text-success">done</span>
-                                </a>
-                            </td>
-                        </tr>
+                                <td>
+                                    <a href="../scripts.php?bloqueardev=<?php echo $dados["id"]; ?>" onclick="if(!confirm('Deseja bloquear este usuário?')) event.preventDefault()">
+                                        <span class="material-symbols-outlined text-danger">cancel</span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="../scripts.php?aprovardev=<?php echo $dados["id"]; ?>" onclick="if(!confirm('Deseja aprovar este usuário?')) event.preventDefault()">
+                                        <span class="material-symbols-outlined text-success">done</span>
+                                    </a>
+                                </td>
+                            </tr>
                         <?php } ?>
                     </tbody>
                 </table>
@@ -103,40 +102,40 @@ include_once "../header.php";
     </div>
 
     <?php
-        if (isset($_GET["apagarcliente"])) {
-            $apagarcliente = $_GET["apagarcliente"];
-            if ($apagarcliente == 200) {
-                echo "<script>
+    if (isset($_GET["apagarcliente"])) {
+        $apagarcliente = $_GET["apagarcliente"];
+        if ($apagarcliente == 200) {
+            echo "<script>
       Swal.fire(
         'Apagado com sucesso!',
         '',
         'success'
       )
       </script>";
-            }
         }
+    }
 
-        if (isset($_GET["editarcliente"])) {
-            $apagarcliente = $_GET["editarcliente"];
+    if (isset($_GET["editarcliente"])) {
+        $apagarcliente = $_GET["editarcliente"];
 
-            if ($apagarcliente == 200) {
-                echo "<script>
+        if ($apagarcliente == 200) {
+            echo "<script>
         Swal.fire(
           'Alterado com sucesso!',
           '',
           'success'
         )
         </script>";
-            }
         }
-        ?>
+    }
+    ?>
 
 
 </main><!-- End #main -->
 
-<?php 
-    $total_despesas_empresa =0;
-    include ('../footer.php');
+<?php
+$total_despesas_empresa = 0;
+include('../footer.php');
 
 ?>
 

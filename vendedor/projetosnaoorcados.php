@@ -6,21 +6,19 @@ include_once "../header.php";
 
 
 <?php
-    if (isset($_GET["jaorçado"])) {
+if (isset($_GET["jaorçado"])) {
 
-        if ($_GET["jaorçado"] == 200) {
-            echo "<script>alert('projeto já orçado por outro desenvolvedor, não roube a vez do coleguinha.')</script>";
-        }
-
+    if ($_GET["jaorçado"] == 200) {
+        echo "<script>alert('projeto já orçado por outro desenvolvedor, não roube a vez do coleguinha.')</script>";
     }
-    if (isset($_GET["orcamentoenviado"])) {
+}
+if (isset($_GET["orcamentoenviado"])) {
 
-        if ($_GET["orcamentoenviado"] == 200) {
-            echo "<script>alert('Orçamento enviado com sucesso')</script>";
-        }
-
+    if ($_GET["orcamentoenviado"] == 200) {
+        echo "<script>alert('Orçamento enviado com sucesso')</script>";
     }
-    ?>
+}
+?>
 
 <main id="main" class="main">
 
@@ -50,6 +48,8 @@ include_once "../header.php";
                                     <th scope="col">Projeto</th>
                                     <th scope="col">Briefing</th>
                                     <th scope="col">Status</th>
+
+                                    <th scope="col">Apagar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -59,23 +59,25 @@ include_once "../header.php";
 
                                 while ($dados = mysqli_fetch_assoc($resultado)) {
                                     # code...
-                                
-                                    ?>
-                                <script>
-                                function idHidden(id) {
-                                    $("#hidden").val(id);
-                                }
-                                </script>
-                                <tr>
-                                    <td><?php echo $dados["nome"]; ?></td>
-                                    <td><a href="<?php echo $dados["briefing"]; ?>" target="_blank"> <span
-                                                class="material-symbols-outlined text-primary">description</a></span>
-                                    </td>
-                                    <td><span class="badge bg-success"><?php echo $dados["status"]; ?></span></td>
 
-                                </tr>
-                                <?php }
-                                ; ?>
+                                ?>
+                                    <script>
+                                        function idHidden(id) {
+                                            $("#hidden").val(id);
+                                        }
+                                    </script>
+                                    <tr>
+                                        <td><?php echo $dados["nome"]; ?></td>
+                                        <td><a href="<?php echo $dados["briefing"]; ?>" target="_blank"> <span class="material-symbols-outlined text-primary">description</a></span></td>
+                                        <td><span class="badge bg-success"><?php echo $dados["status"]; ?></span></td>
+                                        <td>
+                                            <a href="../scripts.php?deletarprojetovendedor=<?php echo $dados["id"]; ?>" onclick="if(!confirm('Deseja realmente remover este projeto?')) event.preventDefault()">
+                                                <span class="material-symbols-outlined text-danger">delete</span>
+                                            </a>
+                                        </td>
+
+                                    </tr>
+                                <?php }; ?>
                             </tbody>
                         </table>
 
@@ -83,26 +85,9 @@ include_once "../header.php";
 
                 </div>
             </div><!-- End Recent Sales -->
-
-
-
         </div>
-        </div><!-- End Left side columns -->
 
 
-
-
-
-
-
-
-
-        </div>
-        </div><!-- End News & Updates -->
-
-        </div><!-- End Right side columns -->
-
-        </div>
     </section>
 
 </main><!-- End #main -->
@@ -128,22 +113,22 @@ include_once "../header.php";
                     </div>
                     <input type="hidden" name="id" id="hidden" value="">
                     <script>
-                    function trim(str) {
-                        return str.replace(/[^a-zA-Z0-9]/g, '')
-                    }
-
-                    let input = document.getElementById('um')
-                    let input2 = document.getElementById('dois')
-
-
-                    input.onkeyup = function() {
-                        if (input.value < 20) {
-                            input2.value = trim(input.value) * 25
-                            exit();
-                        } else {
-                            input2.value = trim(input.value) * 17
+                        function trim(str) {
+                            return str.replace(/[^a-zA-Z0-9]/g, '')
                         }
-                    }
+
+                        let input = document.getElementById('um')
+                        let input2 = document.getElementById('dois')
+
+
+                        input.onkeyup = function() {
+                            if (input.value < 20) {
+                                input2.value = trim(input.value) * 25
+                                exit();
+                            } else {
+                                input2.value = trim(input.value) * 17
+                            }
+                        }
                     </script>
             </div>
             <div class="modal-footer">
@@ -157,39 +142,39 @@ include_once "../header.php";
 
 
 <?php
-    if (isset($_POST["enviar"])) {
+if (isset($_POST["enviar"])) {
 
-        ?>
+?>
 
-<script>
-Swal.fire(
-    'Orçamento enviado com sucesso!',
-    'Aguarde a resposta do cliente.',
-    'success'
-)
-</script>
+    <script>
+        Swal.fire(
+            'Orçamento enviado com sucesso!',
+            'Aguarde a resposta do cliente.',
+            'success'
+        )
+    </script>
 
 <?php } ?>
 
 
 <?php
-    if (isset($_POST["apagar"])) {
+if (isset($_POST["apagar"])) {
 
-        ?>
+?>
 
-<script>
-Swal.fire(
-    'Apagado com sucesso!',
-    '',
-    'success'
-)
-</script>
+    <script>
+        Swal.fire(
+            'Apagado com sucesso!',
+            '',
+            'success'
+        )
+    </script>
 
 <?php } ?>
 
-<?php 
-    $total_despesas_empresa =0;
-    include ('../footer.php');
+<?php
+$total_despesas_empresa = 0;
+include('../footer.php');
 
 ?>
 

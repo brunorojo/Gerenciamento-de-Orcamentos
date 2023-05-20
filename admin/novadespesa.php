@@ -41,8 +41,7 @@ include_once "../header.php";
 
 
             <div class="form-floating">
-                <textarea name="descricao" class="form-control" placeholder="Leave a comment here"
-                    id="floatingTextarea2" style="height: 100px"></textarea>
+                <textarea name="descricao" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
                 <label for="floatingTextarea2">Descrição da despesa</label>
 
             </div>
@@ -51,61 +50,61 @@ include_once "../header.php";
     </section>
 
     <?php
-        if (isset($_GET["resultado"])) {
-            $resultado = $_GET["resultado"];
-            if ($resultado == 200) {
-                echo "<script>
+    if (isset($_GET["resultado"])) {
+        $resultado = $_GET["resultado"];
+        if ($resultado == 200) {
+            echo "<script>
                      Swal.fire('Cadastrado com sucesso!','','success')
                      </script>";
-            }
         }
-        ?>
+    }
+    ?>
 
 
 </main><!-- End #main -->
 
-<?php 
-    $total_despesas_empresa =0;
-    include ('../footer.php');
+<?php
+$total_despesas_empresa = 0;
+include('../footer.php');
 
 ?>
 
 <!-- script para add parcelas -->
 <script>
-function obterDataParcela(meses) {
+    function obterDataParcela(meses) {
 
-    meses--;
+        meses--;
 
-    let currentDate = new Date();
+        let currentDate = new Date();
 
-    let x = currentDate.setMonth(currentDate.getMonth() + meses);
-    x = dateFormat = new Date(x);
+        let x = currentDate.setMonth(currentDate.getMonth() + meses);
+        x = dateFormat = new Date(x);
 
-    let dia = x.getDate();
-    let mes = x.getMonth() + 1;
-    mes = mes < 10 ? '0' + mes : mes;
-    let ano = x.getFullYear();
+        let dia = x.getDate();
+        let mes = x.getMonth() + 1;
+        mes = mes < 10 ? '0' + mes : mes;
+        let ano = x.getFullYear();
 
-    return `${ano}-${mes}-${dia}`;
-}
-
-
-function addParcelas() {
-    let valor_despesa = document.getElementById('valor-despesa').value;
-    let total_parcelas = document.getElementById('total-parcelas').value;
-
-    let valor_parcela = valor_despesa / total_parcelas;
-    valor_parcela = valor_parcela.toFixed(2)
-
-    let el_parcelas = document.getElementById('parcelas')
-    el_parcelas.innerHTML = '';
+        return `${ano}-${mes}-${dia}`;
+    }
 
 
-    for (let i = 1; i <= total_parcelas; i++) {
+    function addParcelas() {
+        let valor_despesa = document.getElementById('valor-despesa').value;
+        let total_parcelas = document.getElementById('total-parcelas').value;
 
-        let data_parcela = obterDataParcela(i);
+        let valor_parcela = valor_despesa / total_parcelas;
+        valor_parcela = valor_parcela.toFixed(2)
 
-        el_parcelas.innerHTML += `
+        let el_parcelas = document.getElementById('parcelas')
+        el_parcelas.innerHTML = '';
+
+
+        for (let i = 1; i <= total_parcelas; i++) {
+
+            let data_parcela = obterDataParcela(i);
+
+            el_parcelas.innerHTML += `
                     <div class="mb-3">
                         <div class="fw-bold small mb-1">${i}º Parcela</div>
                         <div class="row">
@@ -120,15 +119,17 @@ function addParcelas() {
                         </div>
                     </div>
                 `
-    }
-}
 
-document.getElementById('valor-despesa').onkeyup = function() {
-    addParcelas();
-}
-document.getElementById('total-parcelas').onkeyup = function() {
-    addParcelas();
-}
+        }
+
+    }
+
+    document.getElementById('valor-despesa').onkeyup = function() {
+        addParcelas();
+    }
+    document.getElementById('total-parcelas').onkeyup = function() {
+        addParcelas();
+    }
 </script>
 
 </body>

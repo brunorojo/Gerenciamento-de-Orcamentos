@@ -19,8 +19,7 @@
     <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet" />
 </head>
 
 <body>
@@ -57,8 +56,7 @@
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input type="password" name="senha" autocomplete="off" placeholder="Senha" id="id_password"
-                            required="yes" />
+                        <input type="password" name="senha" autocomplete="off" placeholder="Senha" id="id_password" required="yes" />
                         <i class="far fa-eye" id="togglePassword" style="cursor: pointer;"></i>
                     </div>
                     <input type="submit" value="Entrar" name="logar" class="btn solid" />
@@ -73,8 +71,7 @@
                     </div>
                     <div class="input-field">
                         <i class="fas fa-phone"></i>
-                        <input type="number" name="whatsapp" maxlength="10" autocomplete="off" placeholder="Whatsapp"
-                            required="no" />
+                        <input type="number" name="whatsapp" maxlength="10" autocomplete="off" placeholder="Whatsapp" required="no" />
                     </div>
                     <div class="input-field">
                         <i class="fas fa-envelope"></i>
@@ -82,8 +79,7 @@
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input type="password" name="senha" autocomplete="off" placeholder="Senha" id="id_reg"
-                            required="yes" />
+                        <input type="password" name="senha" autocomplete="off" placeholder="Senha" id="id_reg" required="yes" />
                         <i class="far fa-eye" id="toggleReg" style="cursor: pointer;"></i>
                     </div>
                     <br />
@@ -106,6 +102,7 @@
                 <?php
                 if (isset($_GET["resultado"])) {
                     $resultado = $_GET["resultado"];
+
                     if ($resultado == 200) {
                         echo "<script>
                             Swal.fire(
@@ -114,7 +111,8 @@
                             'success'
                             )
                             </script>";
-                    }else if($resultado==400){
+                    } else if ($resultado == 400) {
+
                         echo "<script>
                             Swal.fire(
                             'Usuário já possui cadastro',
@@ -146,6 +144,12 @@
             </div>
         </div>
     </div>
+
+    <script src="main.js"></script>
+
 </body>
 
 <script src="assets/js/script.js"></script>
+<script>
+
+</script>

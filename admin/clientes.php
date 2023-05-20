@@ -47,37 +47,36 @@ include_once "../header.php";
                     </thead>
                     <tbody>
                         <?php
-                            $sql = "SELECT * FROM cliente";
-                            $resultado = mysqli_query($conn, $sql);
+                        $sql = "SELECT * FROM cliente";
+                        $resultado = mysqli_query($conn, $sql);
 
-                            while ($dados = mysqli_fetch_assoc($resultado)) {
+                        while ($dados = mysqli_fetch_assoc($resultado)) {
 
-                                ?>
-                        <tr>
-                            <td>
-                                <?php echo $dados["nome"]; ?>
-                            </td>
-                            <td>
-                                <?php echo $dados["whatsapp"]; ?>
-                            </td>
-                            <td>
-                                <?php echo $dados["email"]; ?>
-                            </td>
-                            <td>
-                                <?php echo $dados["senha"]; ?>
-                            </td>
-                            <td>
-                                <a href="editarclientes.php?id=<?php echo $dados["id"]; ?>">
-                                    <span class="material-symbols-outlined text-warning">edit</span>
-                                </a>
-                            </td>
-                            <td>
-                                <a href="../scripts.php?deletarcliente=<?php echo $dados["id"]; ?>"
-                                    onclick="if(!confirm('Deseja remover este cliente?')) event.preventDefault()">
-                                    <span class="material-symbols-outlined text-danger">delete</span>
-                                </a>
-                            </td>
-                        </tr>
+                        ?>
+                            <tr>
+                                <td>
+                                    <?php echo $dados["nome"]; ?>
+                                </td>
+                                <td>
+                                    <?php echo $dados["whatsapp"]; ?>
+                                </td>
+                                <td>
+                                    <?php echo $dados["email"]; ?>
+                                </td>
+                                <td>
+                                    <?php echo $dados["senha"]; ?>
+                                </td>
+                                <td>
+                                    <a href="editarclientes.php?id=<?php echo $dados["id"]; ?>">
+                                        <span class="material-symbols-outlined text-warning">edit</span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="../scripts.php?deletarcliente=<?php echo $dados["id"]; ?>" onclick="if(!confirm('Deseja remover este cliente?')) event.preventDefault()">
+                                        <span class="material-symbols-outlined text-danger">delete</span>
+                                    </a>
+                                </td>
+                            </tr>
                         <?php } ?>
                     </tbody>
                 </table>
@@ -88,40 +87,40 @@ include_once "../header.php";
     </div>
 
     <?php
-        if (isset($_GET["apagarcliente"])) {
-            $apagarcliente = $_GET["apagarcliente"];
+    if (isset($_GET["apagarcliente"])) {
+        $apagarcliente = $_GET["apagarcliente"];
 
-            if ($apagarcliente == 200) {
-                echo "<script>
+        if ($apagarcliente == 200) {
+            echo "<script>
       Swal.fire(
         'Apagado com sucesso!',
         '',
         'success'
       )
       </script>";
-            }
         }
+    }
 
-        if (isset($_GET["editarcliente"])) {
-            $apagarcliente = $_GET["editarcliente"];
+    if (isset($_GET["editarcliente"])) {
+        $apagarcliente = $_GET["editarcliente"];
 
-            if ($apagarcliente == 200) {
-                echo "<script>
+        if ($apagarcliente == 200) {
+            echo "<script>
         Swal.fire(
           'Alterado com sucesso!',
           '',
           'success'
         )
         </script>";
-            }
         }
-        $total_despesas_empresa =0;
-        ?>
+    }
+    $total_despesas_empresa = 0;
+    ?>
 
 
 </main><!-- End #main -->
-<?php 
-    include ('../footer.php');
+<?php
+include('../footer.php');
 
 ?>
 

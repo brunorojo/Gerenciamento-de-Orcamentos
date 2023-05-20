@@ -38,20 +38,20 @@ include_once "../header.php";
         </form>
     </section>
     <?php
-        if (isset($_GET["resultado"])) {
-            $resultado = $_GET["resultado"];
+    if (isset($_GET["resultado"])) {
+        $resultado = $_GET["resultado"];
 
-            if ($resultado == 200) {
-                echo "<script>
+        if ($resultado == 200) {
+            echo "<script>
                         Swal.fire('Cadastrado com sucesso!','','success')
                      </script>";
-            }
         }
-        ?>
+    }
+    ?>
 </main><!-- End #main -->
-<?php 
-    $total_despesas_empresa =0;
-    include ('../footer.php');
+<?php
+$total_despesas_empresa = 0;
+include('../footer.php');
 
 ?>
 </body>

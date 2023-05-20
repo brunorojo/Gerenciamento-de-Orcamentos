@@ -39,15 +39,14 @@ if (isset($_GET["resultado"])) {
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Cliente</label>
-                <select name="cliente" class="form-select" id="floatingSelect"
-                    aria-label="Floating label select example">
+                <select name="cliente" class="form-select" id="floatingSelect" aria-label="Floating label select example">
                     <option selected>Selecione o cliente</option>
                     <?php
                     $sql = "SELECT * FROM cliente";
                     $resultado = mysqli_query($conn, $sql);
                     while ($dados = mysqli_fetch_assoc($resultado)) {
                     ?>
-                    <option value="<?php echo $dados["nome"]; ?>"><?php echo $dados["nome"]; ?></option>
+                        <option value="<?php echo $dados["nome"]; ?>"><?php echo $dados["nome"]; ?></option>
                     <?php } ?>
                 </select>
             </div>

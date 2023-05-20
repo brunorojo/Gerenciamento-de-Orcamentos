@@ -44,42 +44,39 @@ include_once "../header.php";
                     <tbody>
                         <?php
 
-                            $sql = "SELECT * FROM despesa ORDER BY status_pagamento, data_pagamento ";
-                            $resultado = mysqli_query($conn, $sql);
+                        $sql = "SELECT * FROM despesa ORDER BY status_pagamento, data_pagamento ";
+                        $resultado = mysqli_query($conn, $sql);
 
-                            while ($dados = mysqli_fetch_assoc($resultado)) {
+                        while ($dados = mysqli_fetch_assoc($resultado)) {
 
-                                ?>
-                        <tr>
-                            <td>
-                                <?php echo $dados["nome"]; ?>
-                            </td>
-                            <td class="fw-semibold text-success">
-                                <?= number_format($dados["valor"], 2, ',', '.') ?>
-                            </td>
-                            <td>
-                                <?php echo $dados["descricao"]; ?>
-                            </td>
-                            <td>
-                                <?php if ($dados["status_pagamento"]): ?>
-                                <span class="badge rounded-pill text-bg-success">Pago</span>
-                                <?php else: ?>
-                                <span class="badge rounded-pill text-bg-warning">Pendente</span>
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <?= date('d/m/Y', strtotime($dados['data_pagamento'])) ?>
-                            </td>
-                            <td>
-                                <a class="link-success text-decoration-none"
-                                    href="../scripts.php?confirmar_pagamento_despesa=true&despesa_id=<?= $dados['id'] ?>"
-                                    onclick="if(!confirm('Confirmar este pagamento?')) event.preventDefault()">
-                                    <span class="material-symbols-outlined text-success">done_all</span>
-                                </a>
-                            </td>
-                        </tr>
-                        <?php }
-                            ; ?>
+                        ?>
+                            <tr>
+                                <td>
+                                    <?php echo $dados["nome"]; ?>
+                                </td>
+                                <td class="fw-semibold text-success">
+                                    <?= number_format($dados["valor"], 2, ',', '.') ?>
+                                </td>
+                                <td>
+                                    <?php echo $dados["descricao"]; ?>
+                                </td>
+                                <td>
+                                    <?php if ($dados["status_pagamento"]) : ?>
+                                        <span class="badge rounded-pill text-bg-success">Pago</span>
+                                    <?php else : ?>
+                                        <span class="badge rounded-pill text-bg-warning">Pendente</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?= date('d/m/Y', strtotime($dados['data_pagamento'])) ?>
+                                </td>
+                                <td>
+                                    <a class="link-success text-decoration-none" href="../scripts.php?confirmar_pagamento_despesa=true&despesa_id=<?= $dados['id'] ?>" onclick="if(!confirm('Confirmar este pagamento?')) event.preventDefault()">
+                                        <span class="material-symbols-outlined text-success">done_all</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php }; ?>
                     </tbody>
                 </table>
 
@@ -89,9 +86,9 @@ include_once "../header.php";
     </div>
 
 </main><!-- End #main -->
-<?php 
-    $total_despesas_empresa =0;
-    include ('../footer.php');
+<?php
+$total_despesas_empresa = 0;
+include('../footer.php');
 
 ?>
 

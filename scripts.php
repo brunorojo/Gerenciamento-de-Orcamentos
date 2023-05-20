@@ -5,14 +5,17 @@ include_once "conexao.php";
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
 </body>
+
 </html>
 
 <?php
@@ -20,7 +23,7 @@ include_once "conexao.php";
 if (isset($_POST["logar"])) {
    $email = $_POST["email"];
    $senha = $_POST["senha"];
-   
+
    $niveis = ['admin', 'dev', 'vendedor', 'bloq', 'Aguardando'];
    $redirects = ['admin/', 'desenvolvedor/', 'vendedor/', 'index.php?id=500', 'index.php?id=600'];
 
@@ -34,10 +37,10 @@ if (isset($_POST["logar"])) {
          $_SESSION['usuario'] = $nivel;
          $_SESSION['nome'] = $dados['nome'];
          // $_SESSION['usuario'] = $nivel;
-      
+
 
          if ($nivel === 'dev' || $nivel === 'vendedor') {
-            
+
             $_SESSION['email'] = $dados["nome"];
             $_SESSION['id'] = $dados["id"];
          }
@@ -56,12 +59,12 @@ if (isset($_POST["criar"])) {
    $email = $_POST["email"];
    $senha = $_POST["senha"];
    $nivel = $_POST["opcao"];
-   $status=1;
+   $status = 1;
    $_SESSION['email'] = $nome;
    $desenvolvedor = $_SESSION['email'];
 
-   $buscaEmail="SELECT * FROM login WHERE email = '$email'";
-   $resultbusca= mysqli_query($conn, $buscaEmail);
+   $buscaEmail = "SELECT * FROM login WHERE email = '$email'";
+   $resultbusca = mysqli_query($conn, $buscaEmail);
 
    if (mysqli_num_rows($resultbusca) > 0) {
 
@@ -71,8 +74,7 @@ if (isset($_POST["criar"])) {
       </script>
    ";
 
-   exit();
-
+      exit();
    }
 
 
@@ -80,7 +82,7 @@ if (isset($_POST["criar"])) {
       $sql = "INSERT INTO vendedor (nome, whatsapp, email) VALUES ('$nome', '$whatsapp', '$email')";
       $resultado = mysqli_query($conn, $sql);
    }
-   
+
    $sql = "INSERT INTO login (nome, whatsapp, email, senha, nivel, status) VALUES ('$nome', '$whatsapp', '$email', '$senha', '$nivel', '1')";
    $resultado = mysqli_query($conn, $sql);
 
@@ -120,25 +122,21 @@ if (isset($_POST["cadastrarprojeto"])) {
    $nome = $_POST["nome"];
    $cliente = $_POST["cliente"];
    $briefingpuro = $_POST["briefing"];
-   $briefing= str_replace(" ", "", $briefingpuro);
+   $briefing = str_replace(" ", "", $briefingpuro);
    $data = date("Y-m-d");
    $sql = "INSERT INTO projeto (nome, cliente, briefing, status, data_inicio) VALUES ('$nome', '$cliente', '$briefing', 'Aguardando', '$data')";
    $resultado = mysqli_query($conn, $sql);
 
-   if($resultado){
+   if ($resultado) {
       echo "
       <script>
       window.location.href = 'admin/novoprojeto.php?resultado=200';
       </script>
    ";
-
-   }else{
-      echo "erro".mysqli_error($conn);
+   } else {
+      echo "erro" . mysqli_error($conn);
    }
-     
-
-      
-   }
+}
 
 
 // tela de cadastro de projetos de vendedores
@@ -146,9 +144,9 @@ if (isset($_POST["cadastrarprojetovendedor"])) {
    $nome = $_POST["nome"];
    $briefing = $_POST["briefing"];
    $briefingpuro = $_POST["briefing"];
-   $briefing= str_replace(" ", "", $briefingpuro);
+   $briefing = str_replace(" ", "", $briefingpuro);
 
-   
+
    $data = date("d-m-y");
    $sql = "INSERT INTO projeto (nome, cliente, briefing, status, data_inicio) VALUES ('$nome', ' $_SESSION[email]', '$briefing', 'Aguardando', '$data')";
    $resultado = mysqli_query($conn, $sql);
@@ -591,7 +589,7 @@ if (isset($_POST["editaradmin"])) {
 if (isset($_POST["enviarvalor"])) {
 
    $id = $_POST["id"];
- 
+
 
    $sql = "SELECT * FROM projeto WHERE id = '$id'";
    $resultado = mysqli_query($conn, $sql);
@@ -652,12 +650,12 @@ if (isset($_POST["enviarvalor"])) {
    $sql = "UPDATE projeto SET desenvolvedor = '$desenvolvedor',
     valordev = '$orcamento', valorcliente = '$valorcliente', lucroempresa =
      '$lucroempresa', status='orçado', dataentrega='$dataentrega' WHERE id = '$id'";
-      $resultado = mysqli_query($conn, $sql);
+   $resultado = mysqli_query($conn, $sql);
 
    $dev_id = $_SESSION['id'];
 
-   $observacao= isset($_POST['observacao']) ? $_POST['observacao'] : null;
-   $observacao= base64_encode(htmlentities($observacao));
+   $observacao = isset($_POST['observacao']) ? $_POST['observacao'] : null;
+   $observacao = base64_encode(htmlentities($observacao));
 
    $sql = "INSERT INTO
                orcamentos (projeto_id, dev_id, dev, valor_dev, valor_cliente, lucro_empresa, orc_status, data_entrega, observacao)
@@ -672,29 +670,29 @@ if (isset($_POST["enviarvalor"])) {
 
       while ($dados = mysqli_fetch_assoc($resultado)) {
 
-         if($api_whats_habilitada):
-         $curl = curl_init();
+         if ($api_whats_habilitada) :
+            $curl = curl_init();
 
-      curl_setopt_array($curl, array(
-        CURLOPT_URL => $url_point_whats,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "POST",
-        CURLOPT_POSTFIELDS => "",
-        CURLOPT_HTTPHEADER => array(
-          "Content-Type: application/x-www-form-urlencoded"
-        ),
-      ));
+            curl_setopt_array($curl, array(
+               CURLOPT_URL => $url_point_whats,
+               CURLOPT_RETURNTRANSFER => true,
+               CURLOPT_ENCODING => "",
+               CURLOPT_MAXREDIRS => 10,
+               CURLOPT_TIMEOUT => 0,
+               CURLOPT_FOLLOWLOCATION => true,
+               CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+               CURLOPT_CUSTOMREQUEST => "POST",
+               CURLOPT_POSTFIELDS => "",
+               CURLOPT_HTTPHEADER => array(
+                  "Content-Type: application/x-www-form-urlencoded"
+               ),
+            ));
 
-      $response = curl_exec($curl);
+            $response = curl_exec($curl);
 
-      curl_close($curl);
-      echo $response;
-   endif;
+            curl_close($curl);
+            echo $response;
+         endif;
       }
 
 
@@ -723,7 +721,7 @@ if (isset($_POST["enviarvalor"])) {
    $sql = "SELECT whatsapp FROM cliente WHERE nome = '$cliente'";
    $resultado = mysqli_query($conn, $sql);
 
-   
+
 
    echo "
 
@@ -750,29 +748,29 @@ if (isset($_GET["aprovarprojeto"])) {
    if (isset($resultado)) {
 
 
-      if(isset($_GET['orcamento_id'])):
+      if (isset($_GET['orcamento_id'])) :
          /* add dados do orcamento ao projeto */
          $sql = "SELECT * FROM orcamentos WHERE id = " . $_GET['orcamento_id'];
          $resultado = mysqli_query($conn, $sql);
-         $dados_orc= mysqli_fetch_object($resultado);
+         $dados_orc = mysqli_fetch_object($resultado);
 
          $sql = "UPDATE projeto SET
-            desenvolvedor = '".$dados_orc->dev."',
-            valordev = ".$dados_orc->valor_dev.",
-            valorcliente = ".$dados_orc->valor_cliente.",
-            lucroempresa = '".$dados_orc->lucro_empresa."',
-            dataentrega = '".$dados_orc->data_entrega."'
+            desenvolvedor = '" . $dados_orc->dev . "',
+            valordev = " . $dados_orc->valor_dev . ",
+            valorcliente = " . $dados_orc->valor_cliente . ",
+            lucroempresa = '" . $dados_orc->lucro_empresa . "',
+            dataentrega = '" . $dados_orc->data_entrega . "'
             WHERE id = '$id'";
          $resultado = mysqli_query($conn, $sql);
 
          $sql = "DELETE FROM orcamentos WHERE projeto_id = $id && id != " . $dados_orc->id;
          $resultado = mysqli_query($conn, $sql);
 
-      else:
+      else :
 
          $sql = "SELECT * FROM projeto WHERE id = '$id'";
          $resultado = mysqli_query($conn, $sql);
-         $dados_x= mysqli_fetch_object($resultado);
+         $dados_x = mysqli_fetch_object($resultado);
 
          $sql = "DELETE FROM orcamentos
             WHERE projeto_id = $id && dev != '" . $dados_x->desenvolvedor . "';";
@@ -819,23 +817,21 @@ if (isset($_GET["aprovarprojeto"])) {
          $nome = $dados["nome"];
       }
 
-      
-   if($_SESSION['usuario'] == 'admin'):
-      echo "
+
+      if ($_SESSION['usuario'] == 'admin') :
+         echo "
         <script>
                window.location.href = 'admin/projetos.php?aprovado=200';
          </script>
       ";
-   endif;
-   if($_SESSION['usuario'] == 'vendedor'):
-      echo "
+      endif;
+      if ($_SESSION['usuario'] == 'vendedor') :
+         echo "
         <script>
                window.location.href = 'vendedor/projetosfechados.php?aprovado=200';
          </script>
       ";
-   endif;
-
-
+      endif;
    }
 }
 
@@ -850,8 +846,8 @@ if (isset($_GET["iniciarprojeto"])) {
 
    while ($dados = mysqli_fetch_assoc($resultado)) {
       $valordev = $dados["valordev"];
-      if($dados["status"] == 'Aguardando' || $dados["status"] == 'orçado') {
-        echo" <script>
+      if ($dados["status"] == 'Aguardando' || $dados["status"] == 'orçado') {
+         echo " <script>
        window.location.href = 'desenvolvedor/seusprojetos.php?resultado=550';
       </script>";
          // echo "Esse projeto ainda não foi aprovado!";
@@ -881,7 +877,7 @@ if (isset($_GET["iniciarprojeto"])) {
          $sql = "SELECT * FROM login WHERE nivel = 'admin'";
          $resultado = mysqli_query($conn, $sql);
 
-       
+
 
 
          echo "
@@ -906,15 +902,15 @@ if (isset($_GET["finalizarprojeto"])) {
    $sql = "SELECT * from projeto WHERE id = '$id'";
    $resultado = mysqli_query($conn, $sql);
 
-   $dados_projeto= mysqli_fetch_object($resultado);
+   $dados_projeto = mysqli_fetch_object($resultado);
 
    $sql = "SELECT * FROM projeto WHERE id = '$id'";
    $resultado = mysqli_query($conn, $sql);
 
    while ($dados = mysqli_fetch_assoc($resultado)) {
       $valordev = $dados["valordev"];
-      if($dados["status"] == 'Aguardando' || $dados["status"] == 'orçado') {
-         echo" <script>
+      if ($dados["status"] == 'Aguardando' || $dados["status"] == 'orçado') {
+         echo " <script>
          window.location.href = 'desenvolvedor/seusprojetos.php?resultado=550';
         </script>";
          exit;
@@ -922,7 +918,7 @@ if (isset($_GET["finalizarprojeto"])) {
    }
 
    $sql = "UPDATE projeto SET status = 'finalizado' WHERE id = '$id'";
-      $resultado = mysqli_query($conn, $sql);
+   $resultado = mysqli_query($conn, $sql);
 
 
 
@@ -944,29 +940,29 @@ if (isset($_GET["finalizarprojeto"])) {
          $whatsapp = $dados["whatsapp"];
          $nome = $dados["nome"];
 
-         if($api_whats_habilitada):
-         $curl = curl_init();
+         if ($api_whats_habilitada) :
+            $curl = curl_init();
 
-         curl_setopt_array($curl, array(
-            CURLOPT_URL => $url_point_whats,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "",
-            CURLOPT_HTTPHEADER => array(
-               "Content-Type: application/x-www-form-urlencoded"
-            ),
-         ));
+            curl_setopt_array($curl, array(
+               CURLOPT_URL => $url_point_whats,
+               CURLOPT_RETURNTRANSFER => true,
+               CURLOPT_ENCODING => "",
+               CURLOPT_MAXREDIRS => 10,
+               CURLOPT_TIMEOUT => 0,
+               CURLOPT_FOLLOWLOCATION => true,
+               CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+               CURLOPT_CUSTOMREQUEST => "POST",
+               CURLOPT_POSTFIELDS => "",
+               CURLOPT_HTTPHEADER => array(
+                  "Content-Type: application/x-www-form-urlencoded"
+               ),
+            ));
 
-         $response = curl_exec($curl);
+            $response = curl_exec($curl);
 
-         curl_close($curl);
-         echo $response;
-      endif;
+            curl_close($curl);
+            echo $response;
+         endif;
       }
 
 
@@ -1217,19 +1213,19 @@ if (isset($_GET["aprovardev"])) {
 if (isset($_GET["encaminhar_orcamento_vendedor"])) {
 
    $id = $_GET["projeto_id"];
-   $orcamento_id= $_GET['orcamento_id'];
+   $orcamento_id = $_GET['orcamento_id'];
 
    /* add dados do orcamento ao projeto */
    $sql = "SELECT * FROM orcamentos WHERE id = " . $orcamento_id;
    $resultado = mysqli_query($conn, $sql);
-   $dados_orc= mysqli_fetch_object($resultado);
+   $dados_orc = mysqli_fetch_object($resultado);
 
    $sql = "UPDATE projeto SET
-      desenvolvedor = '".$dados_orc->dev."',
-      valordev = ".$dados_orc->valor_dev.",
-      valorcliente = ".$dados_orc->valor_cliente.",
-      lucroempresa = '".$dados_orc->lucro_empresa."',
-      dataentrega = '".$dados_orc->data_entrega."',
+      desenvolvedor = '" . $dados_orc->dev . "',
+      valordev = " . $dados_orc->valor_dev . ",
+      valorcliente = " . $dados_orc->valor_cliente . ",
+      lucroempresa = '" . $dados_orc->lucro_empresa . "',
+      dataentrega = '" . $dados_orc->data_entrega . "',
       status = 'orçado'
       WHERE id = '$id'";
    $resultado = mysqli_query($conn, $sql);
@@ -1242,4 +1238,4 @@ if (isset($_GET["encaminhar_orcamento_vendedor"])) {
             alert('Projeto encaminhado para o vendedor!');
             window.location.href = 'admin/projetos.php';
          </script>";
-   }
+}

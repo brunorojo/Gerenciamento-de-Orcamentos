@@ -7,20 +7,20 @@ include_once "../header.php";
 
 
 <?php
-    if (isset($_GET["resultado"])) {
-        $resultado = $_GET["resultado"];
+if (isset($_GET["resultado"])) {
+    $resultado = $_GET["resultado"];
 
-        if ($resultado == 200) {
-            echo "<script>
+    if ($resultado == 200) {
+        echo "<script>
       Swal.fire(
         'Cadastrado com sucesso!',
         '',
         'success'
       )
       </script>";
-        }
     }
-    ?>
+}
+?>
 
 <main id="main" class="main">
 
@@ -53,9 +53,9 @@ include_once "../header.php";
     </form>
 
 </main><!-- End #main -->
-<?php 
-    $total_despesas_empresa =0;
-    include ('../footer.php');
+<?php
+$total_despesas_empresa = 0;
+include('../footer.php');
 
 ?>
 
