@@ -1,1 +1,3 @@
-# TCC PUC Minas
+# Sistema de gerenciamento de orçamentos
+- Mysql
+- PHP
