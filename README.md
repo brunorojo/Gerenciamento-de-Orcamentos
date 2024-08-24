@@ -1,3 +1,4 @@
-# Sistema de gerenciamento de orçamentos
+# Sistema de Gerenciamento de Orçamentos
+
 - Mysql
 - PHP
